@@ -1,0 +1,109 @@
+---
+const GITHUB_USERNAME = "lpalacios1410";
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+
+console.log("token usado", GITHUB_TOKEN ? "SI" : "NO");
+
+const query = `
+  query($login: String!) {
+    user(login: $login) {
+      contributionsCollection {
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              contributionCount
+              date
+              color
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const response = await fetch("https://api.github.com/graphql", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${GITHUB_TOKEN}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ query, variables: { login: GITHUB_USERNAME } }),
+});
+
+const result = await response.json();
+
+// Manejo de errores básico
+if (result.errors) {
+  console.error("✖️Error de github", result.errors);
+  throw new Error("Error al obtener datos de GitHub. Revisa tu Token.");
+}
+
+if (!result.data || !result.data.user) {
+  console.error(
+    "✖️No se recibieron datos del usuario. Revise TOKEN y USERNAME.",
+  );
+  console.log("Respuesta completa", result);
+  return;
+}
+
+const calendar: CalendarData =
+  result.data.user.contributionsCollection.contributionCalendar;
+
+// Props
+interface ContributionDay {
+  contributionCount: number;
+  date: string;
+  color: string;
+}
+
+interface ContributionWeek {
+  contributionDays: ContributionDay[];
+}
+
+interface CalendarData {
+  totalContributions: number;
+  weeks: ContributionWeek[];
+}
+---
+
+<section
+  class="bg-[#0d1117] border border-gray-700 rounded-xl p-6 max-w-4xl mx-auto my-8 font-sans"
+>
+  <div class="flex justify-between items-center mb-4 text-gray-300">
+    <h3 class="text-sm font-semibold">Contribuciones en el último año</h3>
+    <span class="text-xs">{calendar.totalContributions} total</span>
+  </div>
+
+  <div class="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
+    {
+      calendar.weeks.map((week) => (
+        <div class="flex flex-col gap-1 shrink-0">
+          {week.contributionDays.map((day) => (
+            <div
+              class="w-2.5 h-2.5 rounded-xxs transition-transform hover:scale-150"
+              style={{
+                backgroundColor:
+                  day.color === "#ebedf0" ? "#161b22" : day.color,
+              }}
+              title={`${day.date}: ${day.contributionCount} contribuciones`}
+            />
+          ))}
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="flex items-center gap-2 mt-4 text-2xs text-gray-400 justify-end">
+    <span>Less</span>
+    <div class="flex gap-1">
+      <div class="w-2.5 h-2.5 bg-[#161b22] rounded-xxs"></div>
+      <div class="w-2.5 h-2.5 bg-[#0e4429] rounded-xxs"></div>
+      <div class="w-2.5 h-2.5 bg-[#006d32] rounded-xxs"></div>
+      <div class="w-2.5 h-2.5 bg-[#26a641] rounded-xxs"></div>
+      <div class="w-2.5 h-2.5 bg-[#39d353] rounded-xxs"></div>
+    </div>
+    <span>More</span>
+  </div>
+</section>
