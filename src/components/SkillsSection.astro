@@ -2,11 +2,11 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<section class="bg-gray-500/10 py-12 mt-5 relative scroll-mt-20" id="skills">
+<section class="skills bg-gray-500/10 py-12 mt-5 mb-5 relative scroll-mt-20">
   <div class="mb-16 text-center">
     <div class="flex items-center justify-center gap-4 mb-4">
       <h2
-        class="text-5xl font-black tracking-widest flex items-center gap-4 text-on-surface"
+        class="text-3xl md:text-5xl font-black tracking-widest flex items-center gap-4 text-on-surface"
       >
         {`{}`} Habilidades
       </h2>
@@ -20,7 +20,7 @@ import { Icon } from "astro-icon/components";
       >
         <!-- Frontend Stack -->
         <div
-          class="bg-gray-500/10 rounded-2xl border-t-3 border-blue-600 overflow-hidden"
+          class="cardSkill bg-gray-500/10 rounded-2xl border-t-3 border-blue-600 overflow-hidden"
         >
           <div class="bg-black/30">
             <div
@@ -83,7 +83,7 @@ import { Icon } from "astro-icon/components";
         </div>
         <!-- Backend Stack -->
         <div
-          class="bg-gray-500/10 rounded-2xl border-t-3 border-green-600 overflow-hidden"
+          class="cardSkill bg-gray-500/10 rounded-2xl border-t-3 border-green-600 overflow-hidden"
         >
           <div class="bg-black/30">
             <div
@@ -130,7 +130,7 @@ import { Icon } from "astro-icon/components";
         </div>
         <!-- Tools Stack -->
         <div
-          class="bg-gray-500/10 rounded-2xl border-t-3 border-red-600 overflow-hidden"
+          class="cardSkill bg-gray-500/10 rounded-2xl border-t-3 border-red-600 overflow-hidden"
         >
           <div class="bg-black/30">
             <div
@@ -195,3 +195,43 @@ import { Icon } from "astro-icon/components";
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animación para la sección completa
+  gsap.fromTo(
+    ".skills",
+    { opacity: 0, y: 10 },
+    {
+      opacity: 1,
+      y: 0,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".skills",
+        start: "top 85%", // Caja -> viewport
+        scrub: 1,
+      },
+    },
+  );
+
+  // Animación para las cards
+  gsap.fromTo(
+    ".cardSkill",
+    { opacity: 0, x: -300 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#skills",
+        start: "20% center",
+        toggleActions: "play none none reverse",
+      },
+    },
+  );
+</script>

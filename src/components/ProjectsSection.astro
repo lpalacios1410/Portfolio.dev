@@ -3,7 +3,9 @@
 ---
 
 <section class="max-w-7xl mx-auto px-8 scroll-mt-20" id="projects">
-  <div class="mb-16 flex items-baseline justify-between">
+  <div
+    class="mb-16 flex flex-col gap-5 md:flex-row items-baseline justify-between"
+  >
     <h2 class="text-5xl font-black tracking-tighter text-on-surface">
       Featured Projects
     </h2>
@@ -20,13 +22,15 @@
     >
       <div class="h-48 overflow-hidden bg-surface-container-lowest">
         <img
-          class="w-full h-full object-contain group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
+          class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
           data-alt="Abstract visualization of a node-based network engine with glowing blue connection points on a dark grid"
           src="onlygirlsccs.png"
         />
       </div>
       <div class="p-8 space-y-6">
-        <div class="flex justify-between items-start">
+        <div
+          class="flex flex-col justify-between items-center gap-4 lg:flex-row lg:items-start"
+        >
           <h4 class="text-2xl font-bold text-primary">Onlygirlsccs</h4>
           <div class="flex gap-3 text-on-surface-variant">
             <a
