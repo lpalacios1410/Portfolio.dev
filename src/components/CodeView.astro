@@ -22,42 +22,167 @@
       <div class="w-3 h-3 rounded-full bg-blue-500/40"></div>
     </div>
     <div
-      class="font-['ui-monospace'] text-sm md:text-base leading-loose p-4 text-on-surface-variant/80"
+      class="relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/10 shadow-2xl p-4 md:p-8"
     >
-      <p>
-        <span class="text-blue-400">const</span>
-        <span class="text-green-500">architect</span> = {}
-        <p class="ml-8">
-          name: <span class="text-green-500">"L. Palacios"</span>,
+      <div
+        id="code-container"
+        class="font-['ui-monospace'] text-sm md:text-base leading-loose text-white/80"
+      >
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-green-500"
+        >
+          <span class="line-content">
+            <span class="text-blue-400">const</span>
+            <span class="text-green-500">architect</span> = &#123;
+          </span>
         </p>
-        <p class="ml-8">
-          role: <span class="text-green-500">"Full Stack Developer Jr"</span>,
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            name: <span class="text-green-500">"L. Palacios"</span>,
+          </span>
         </p>
-        <p class="ml-8">
-          focus: [<span class="text-green-500">"Architecture"</span>, <span
-            class="text-green-500">"Performance"</span
-          >, <span class="text-green-500">"UI"</span>],
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            role: <span class="text-green-500">"Full Stack Developer Jr"</span>,
+          </span>
         </p>
-        <p class="ml-8">
-          status: <span class="text-green-500">"Open for Collaboration"</span>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            focus: [<span class="text-green-500">"Architecture"</span>, <span
+              class="text-green-500">"Performance"</span
+            >, <span class="text-green-500">"UI"</span>],
+          </span>
         </p>
-        <p></p>;
-      </p>
-      <br />
-      <p>
-        <span class="text-blue-800">while</span>(architect.active) {}
-        <p class="ml-1 sm-ml-8 text-gray-600">
-          // Engineering the future of the web
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            status: <span class="text-green-500">"Open for Collaboration"</span>
+          </span>
         </p>
-        <p class="ml-2 sm:ml-8">
-          architect.<span class="text-blue-400">build</span>(modernSolutions);
+
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">&#125;;</span>
         </p>
-        <p></p>
-      </p>
+
+        <br />
+
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            <span class="text-purple-400">while</span>(architect.active) &#123;
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent text-gray-500 italic"
+        >
+          <span class="line-content">// Engineering the future of the web</span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            architect.<span class="text-blue-400">build</span>(modernSolutions);
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">&#125;</span>
+        </p>
+      </div>
+
+      <span
+        class="deploy-text absolute right-10 bottom-10 opacity-5 text-6xl font-black italic text-white select-none"
+      >
+        DEPLOY
+      </span>
     </div>
-    <span
-      class="absolute right-10 bottom-10 opacity-5 text-6xl font-black italic"
-      >DEPLOY</span
-    >
+
+    <style>
+      /* Asegura que el texto no se ajuste a la línea siguiente mientras se escribe */
+      .typewriter-line {
+        display: block;
+        font-family: "ui-monospace", monospace;
+      }
+      .line-content {
+        display: inline-block;
+        visibility: hidden; /* Oculto inicialmente */
+      }
+    </style>
   </div>
+
+  <script>
+    import { gsap } from "gsap";
+
+    const initTypewriterLoop = () => {
+      const lines = document.querySelectorAll(".typewriter-line");
+
+      // 1. Preparación: Medir y configurar estados iniciales
+      lines.forEach((line) => {
+        const content = line.querySelector(".line-content");
+        // Hacemos visible el contenido internamente para medirlo
+        gsap.set(content, { visibility: "visible" });
+        // Guardamos el ancho real en un atributo de datos
+        (line as HTMLElement).dataset.width =
+          (content as HTMLElement).offsetWidth + "px";
+        // Volvemos a ocultar el contenedor principal
+        gsap.set(line, { width: 0 });
+      });
+
+      // 2. Crear la Línea de Tiempo Principal (Timeline)
+      // repeat: -1 crea el bucle infinito
+      // repeatDelay: 2 da una pausa de 2s antes de reiniciar
+      // yoyo: true hace que se borre (animación a la inversa)
+      const masterTl = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 2,
+      });
+
+      // 3. Añadir animaciones para cada línea
+      lines.forEach((line, index) => {
+        const targetWidthStr = (line as HTMLElement).dataset.width;
+        const targetWidth = targetWidthStr ? parseFloat(targetWidthStr) : 0;
+
+        // Animación de escritura de la línea actual
+        masterTl.to(line, {
+          width: `${targetWidth}px`,
+          duration: targetWidth * 0.01, // Velocidad basada en la longitud (más caracteres = más tiempo)
+          ease: "none", // Velocidad constante para parecer escritura
+          onStart: () => {
+            // Mostramos el cursor en la línea actual
+            gsap.set(line, { borderRightColor: "#22c55e" }); // green-500
+          },
+          onComplete: () => {
+            // Ocultamos el cursor al terminar la línea, excepto si es la última
+            if (index < lines.length - 1) {
+              gsap.set(line, { borderRightColor: "transparent" });
+            }
+          },
+        });
+      });
+    };
+
+    // Ejecución segura en Astro
+    document.addEventListener("astro:page-load", initTypewriterLoop);
+    // Ejecución inicial por si acaso
+    initTypewriterLoop();
+  </script>
 </section>
