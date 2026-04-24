@@ -1,5 +1,26 @@
 ---
+import react from "../icons/react.svg";
+import tailwind from "../icons/tailwindcss.svg";
 import CardProject from "./CardProject.astro";
+import imgProyecto1 from "../../public/onlygirlsccs.png";
+const projects = [
+  {
+    title: "E-commerce onlygirlsccs",
+    subtitle: "App web",
+    category: "Gestion de productos",
+    description:
+      "Trabajo como repartidor para una tienda online en Caracas, Venezuela. También ayudé a crear un pequeño sistema para que nuestros clientes puedan ver nuestro catálogo. Esto nos permite dejar de depender de WhatsApp y ofrecer otras opciones.",
+    languages: [
+      { label: "React", icon: react },
+      { label: "Tailwind", icon: tailwind },
+    ],
+    status: "Active",
+    imageSrc: imgProyecto1,
+    imageAlt: "Captura de pantalla de la tienda online",
+    urlProject: "https://github.com/lpalacios1410/OnlyGirlsCss-Ecommerce",
+    urlDemo: "https://onlygirlsccs-ecommerce-frontend.vercel.app/",
+  },
+];
 ---
 
 <section class="max-w-7xl mx-auto px-8 scroll-mt-20" id="projects">
@@ -17,6 +38,6 @@ import CardProject from "./CardProject.astro";
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <!-- Card 1 -->
-    <CardProject />
+    {projects.map((project) => <CardProject {...project} />)}
   </div>
 </section>
