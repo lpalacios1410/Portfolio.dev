@@ -1,0 +1,98 @@
+---
+const formacion = [
+  {
+    titulo: "Desarrollador Web Full Stack, Programador",
+    escuela: "4Geeks Academy Venezuela",
+    periodo: "2017 Noviembre - 2018 Marzo",
+    descripcion:
+      "Mi trayectoria en el desarrollo de software comenzó en 2017 con una formación Full Stack en 4Geeks Academy. Este programa fue el catalizador de mi carrera, proporcionándome una base sólida en lógica de programación y permitiéndome desarrollar mi primer proyecto integral. Tras una pausa necesaria para atender asuntos personales",
+  },
+  {
+    titulo: "Programador Full Stack",
+    escuela: "Social Oplesk",
+    periodo: "2024 Agosto - 2025 Marzo",
+    descripcion:
+      "Recientemente completé una especialización en SocialOplesk para actualizar mis bases técnicas, lo que me permitió dar el salto al aprendizaje de manera autodidacta. Soy un desarrollador forjado en la constancia, apoyándome en referentes de la industria (como Midudev y MoureDev) para dominar las tecnologías actuales a través de la práctica intensiva y el desarrollo de proyectos propios. ",
+  },
+];
+---
+
+<section class="formacion py-20 relative" id="formacion">
+  <div class="max-w-7xl mx-auto px-8">
+    <div class="mb-16 text-center">
+      <h2
+        class="text-3xl md:text-5xl font-black tracking-widest flex items-center justify-center gap-4 text-on-surface"
+      >
+        <span class="text-green-500">#</span>
+        Formación Académica
+      </h2>
+    </div>
+
+    <div class="relative">
+      <div
+        class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-linear-to-b from-green-500 via-blue-500 to-purple-500 hidden md:block"
+      >
+      </div>
+
+      {
+        formacion.map((estudio, index) => (
+          <div
+            class={`formacion-item flex items-center justify-between mb-12 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
+          >
+            <div class="w-5/12 hidden md:block">
+              <div
+                class={`formacion-card bg-gray-500/10 rounded-2xl p-6 border border-outline-variant/15 hover:border-green-500/50 transition-all duration-300 text-left`}
+              >
+                <span class="text-green-500 font-mono text-sm">
+                  {estudio.periodo}
+                </span>
+                <h3 class="text-xl font-bold mt-2 text-on-surface">
+                  {estudio.titulo}
+                </h3>
+                <p class="text-blue-400 mt-1">{estudio.escuela}</p>
+                <p class="text-gray-400 text-sm mt-3">{estudio.descripcion}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".formacion h2", {
+    scrollTrigger: {
+      trigger: ".formacion",
+      start: "top 80%",
+    },
+    opacity: 0,
+    y: -50,
+    duration: 0.8,
+    ease: "power3.out",
+  });
+
+  gsap.utils.toArray(".formacion-item").forEach((item: any, i: number) => {
+    gsap.fromTo(
+      item,
+      { opacity: 0, x: i % 2 === 0 ? -100 : 100 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        delay: i * 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      },
+    );
+  });
+</script>
