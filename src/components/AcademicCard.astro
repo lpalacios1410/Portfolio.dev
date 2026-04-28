@@ -12,7 +12,7 @@ const formacion = [
     escuela: "Social Oplesk",
     periodo: "2024 Agosto - 2025 Marzo",
     descripcion:
-      "Recientemente completé una especialización en SocialOplesk para actualizar mis bases técnicas, lo que me permitió dar el salto al aprendizaje de manera autodidacta. Soy un desarrollador forjado en la constancia, apoyándome en referentes de la industria (como Midudev y MoureDev) para dominar las tecnologías actuales a través de la práctica intensiva y el desarrollo de proyectos propios. ",
+      "Recently completé una especialización en SocialOplesk para actualizar mis bases técnicas, lo que me permitió dar el salto al aprendizaje de manera autodidacta. Soy un desarrollador forjado en la constancia, apoyándome en referentes de la industria (como Midudev y MoureDev) para dominar las tecnologías actuales a través de la práctica intensiva y el desarrollo de proyectos propios. ",
   },
 ];
 ---
@@ -21,16 +21,17 @@ const formacion = [
   <div class="max-w-7xl mx-auto px-8">
     <div class="mb-16 text-center">
       <h2
-        class="text-3xl md:text-5xl font-black tracking-widest flex items-center justify-center gap-4 text-on-surface"
+        class="text-3xl md:text-5xl font-black tracking-widest flex items-center justify-center gap-4"
+        style="color: var(--color-on-surface)"
       >
-        <span class="text-green-500">#</span>
         Formación Académica
       </h2>
     </div>
 
     <div class="relative">
       <div
-        class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-linear-to-b from-green-500 via-blue-500 to-purple-500 hidden md:block"
+        class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 hidden md:block"
+        style="background: linear-gradient(to bottom, var(--color-green-500), var(--color-primary), var(--color-blue-400))"
       >
       </div>
 
@@ -41,16 +42,59 @@ const formacion = [
           >
             <div class="w-5/12 hidden md:block">
               <div
-                class={`formacion-card bg-gray-500/10 rounded-2xl p-6 border border-outline-variant/15 hover:border-green-500/50 transition-all duration-300 text-left`}
+                class="formacion-card rounded-2xl p-6 border transition-all duration-300 text-left hover:scale-[1.02]"
+                style="background: var(--color-surface-container-low); border-color: var(--color-outline-variant)"
               >
-                <span class="text-green-500 font-mono text-sm">
+                <span
+                  class="font-mono text-sm"
+                  style="color: var(--color-green-500)"
+                >
                   {estudio.periodo}
                 </span>
-                <h3 class="text-xl font-bold mt-2 text-on-surface">
+                <h3
+                  class="text-xl font-bold mt-2"
+                  style="color: var(--color-on-surface)"
+                >
                   {estudio.titulo}
                 </h3>
-                <p class="text-blue-400 mt-1">{estudio.escuela}</p>
-                <p class="text-gray-400 text-sm mt-3">{estudio.descripcion}</p>
+                <p class="mt-1" style="color: var(--color-primary)">
+                  {estudio.escuela}
+                </p>
+                <p
+                  class="text-sm mt-3"
+                  style="color: var(--color-on-surface-variant)"
+                >
+                  {estudio.descripcion}
+                </p>
+              </div>
+            </div>
+
+            <div class="w-5/12 md:hidden">
+              <div
+                class="formacion-card rounded-2xl p-6 border transition-all duration-300"
+                style="background: var(--color-surface-container-low); border-color: var(--color-outline-variant)"
+              >
+                <span
+                  class="font-mono text-sm"
+                  style="color: var(--color-green-500)"
+                >
+                  {estudio.periodo}
+                </span>
+                <h3
+                  class="text-xl font-bold mt-2"
+                  style="color: var(--color-on-surface)"
+                >
+                  {estudio.titulo}
+                </h3>
+                <p class="mt-1" style="color: var(--color-primary)">
+                  {estudio.escuela}
+                </p>
+                <p
+                  class="text-sm mt-3"
+                  style="color: var(--color-on-surface-variant)"
+                >
+                  {estudio.descripcion}
+                </p>
               </div>
             </div>
           </div>
@@ -67,10 +111,7 @@ const formacion = [
   gsap.registerPlugin(ScrollTrigger);
 
   gsap.from(".formacion h2", {
-    scrollTrigger: {
-      trigger: ".formacion",
-      start: "top 80%",
-    },
+    scrollTrigger: { trigger: ".formacion", start: "top 80%" },
     opacity: 0,
     y: -50,
     duration: 0.8,

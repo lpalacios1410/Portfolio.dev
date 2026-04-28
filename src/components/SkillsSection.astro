@@ -2,37 +2,36 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<section class="skills bg-gray-500/10 py-12 mt-5 mb-5 relative scroll-mt-20">
+<section class="skills py-12 mt-5 mb-5 relative scroll-mt-20 bg-gray-500/10">
   <div class="mb-16 text-center">
     <div class="flex items-center justify-center gap-4 mb-4">
       <h2
-        class="text-3xl md:text-5xl font-black tracking-widest flex items-center gap-4 text-on-surface"
+        class="text-3xl md:text-5xl font-black tracking-widest flex items-center gap-4"
+        style="color: var(--color-on-surface)"
       >
-        {`{}`} Habilidades
+        Habilidades
       </h2>
     </div>
   </div>
   <div class="max-w-7xl mx-auto px-8">
-    <!-- Abajo se ajusta todo -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
       <div
         class="col-span-4 md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
         <!-- Frontend Stack -->
         <div
-          class="cardSkill bg-gray-500/10 rounded-2xl border-t-3 border-blue-600 overflow-hidden"
+          class="cardSkill rounded-2xl overflow-hidden transition-transform duration-300 border-t-4 border-blue-500 bg-gray-500/30 dark:"
+          style=""
         >
-          <div class="bg-black/30">
-            <div
-              class="flex items-center gap-8 p-2 border-b mb-3 border-white/50"
-            >
+          <div class="bg-black/40">
+            <div class="flex items-center gap-8 p-2 border-b mb-3">
               <div class="flex gap-2">
                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                 <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <h4
-                class="font-label text-lg font-bold tracking-tight w-1/2 text-center"
+                class="font-label text-lg font-bold tracking-tight w-1/2 text-center text-white/80"
               >
                 FRONTEND
               </h4>
@@ -40,42 +39,37 @@ import { Icon } from "astro-icon/components";
           </div>
           <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4">
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="html" class="w-15 h-12 hover:scale-110" />HTML 5
+              <Icon name="html" class="w-15 h-12" />HTML 5
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="css" class="w-15 h-12 hover:scale-110" />CSS 3
+              <Icon name="css" class="w-15 h-12" />CSS 3
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="javascript" class="w-15 h-12" /> JavaScript
+              <Icon name="javascript" class="w-15 h-12" />JavaScript
             </div>
-            <!-- <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
-            >
-              <Icon name="typescript" class="w-15 h-12" /> TypeScript
-            </div> -->
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
               <Icon name="react" class="w-15 h-12" />React
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
               <Icon name="astro" class="w-15 h-12" />Astro
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="tailwindcss" class="w-15 h-12" />Tailwind CSS
+              <Icon name="tailwindcss" class="w-15 h-12" />Tailwind
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
               <Icon name="bootstrap" class="w-15 h-12" />Bootstrap
             </div>
@@ -83,19 +77,17 @@ import { Icon } from "astro-icon/components";
         </div>
         <!-- Backend Stack -->
         <div
-          class="cardSkill bg-gray-500/10 rounded-2xl border-t-3 border-green-600 overflow-hidden"
+          class="cardSkill rounded-2xl overflow-hidden transition-transform duration-300 border-t-4 border-green-500 bg-gray-500/30"
         >
-          <div class="bg-black/30">
-            <div
-              class="flex items-center gap-8 p-2 border-b mb-3 border-white/50"
-            >
+          <div class="bg-black/40">
+            <div class="flex items-center gap-8 p-2 border-b mb-3">
               <div class="flex gap-2">
                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                 <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <h4
-                class="font-label text-lg font-bold tracking-tight w-1/2 text-center"
+                class="font-label text-lg font-bold tracking-tight w-1/2 text-center text-white/80"
               >
                 BACKEND
               </h4>
@@ -103,46 +95,40 @@ import { Icon } from "astro-icon/components";
           </div>
           <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4">
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="nodejs" class="w-15 h-12 hover:scale-110" />Node JS
+              <Icon name="nodejs" class="w-15 h-12" />Node JS
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="expressjs" class="w-15 h-12 hover:scale-110" />Express
-              JS
+              <Icon name="expressjs" class="w-15 h-12" />Express
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="python" class="w-15 h-12 hover:scale-110" />Python
+              <Icon name="python" class="w-15 h-12" />Python
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon
-                name="postgresql"
-                class="w-15 h-12 hover:scale-110"
-              />PostgreSQL
+              <Icon name="postgresql" class="w-15 h-12" />PostgreSQL
             </div>
           </div>
         </div>
         <!-- Tools Stack -->
         <div
-          class="cardSkill bg-gray-500/10 rounded-2xl border-t-3 border-red-600 overflow-hidden"
+          class="cardSkill rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 border-t-4 border-red-500 bg-gray-500/30"
         >
-          <div class="bg-black/30">
-            <div
-              class="flex items-center gap-8 p-2 border-b mb-3 border-white/50"
-            >
+          <div class="bg-black/40">
+            <div class="flex items-center gap-8 p-2 border-b mb-3">
               <div class="flex gap-2">
                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                 <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
               </div>
               <h4
-                class="font-label text-lg font-bold tracking-tight w-1/2 text-center"
+                class="font-label text-lg font-bold tracking-tight w-1/2 text-center text-white/80"
               >
                 HERRAMIENTAS
               </h4>
@@ -150,44 +136,39 @@ import { Icon } from "astro-icon/components";
           </div>
           <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4">
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="github" class="w-15 h-12 hover:scale-110" />Github
+              <Icon name="github" class="w-15 h-12" />Github
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="git" class="w-15 h-12 hover:scale-110" />Git
+              <Icon name="git" class="w-15 h-12" />Git
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="copilot" class="w-15 h-12 hover:scale-110" />GitHub
-              Copilot
+              <Icon name="copilot" class="w-15 h-12" />Copilot
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="vscode" class="w-15 h-12 hover:scale-110" />Visual
-              Studio Code
+              <Icon name="vscode" class="w-15 h-12" />VSCode
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="postman" class="w-15 h-12 hover:scale-110" />Postman
+              <Icon name="postman" class="w-15 h-12" />Postman
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon name="docker" class="w-15 h-12 hover:scale-110" />Docker
+              <Icon name="docker" class="w-15 h-12" />Docker
             </div>
             <div
-              class="flex items-center justify-center flex-col font-bold hover:scale-110 transition duration-200"
+              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
             >
-              <Icon
-                name="playwright"
-                class="w-15 h-12 hover:scale-110"
-              />Playwiright
+              <Icon name="playwright" class="w-15 h-12" />Playwright
             </div>
           </div>
         </div>
@@ -203,10 +184,7 @@ import { Icon } from "astro-icon/components";
   gsap.registerPlugin(ScrollTrigger);
 
   gsap.from(".skills h2", {
-    scrollTrigger: {
-      trigger: ".skills",
-      start: "top 80%",
-    },
+    scrollTrigger: { trigger: ".skills", start: "top 80%" },
     opacity: 0,
     y: -30,
     duration: 0.8,
@@ -226,25 +204,6 @@ import { Icon } from "astro-icon/components";
       duration: 0.6,
       delay: i * 0.15,
       ease: "power2.out",
-    });
-  });
-
-  gsap.utils.toArray(".cardSkill").forEach((card: any) => {
-    card.addEventListener("mouseenter", () => {
-      gsap.to(card, {
-        scale: 1.03,
-        y: -5,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    });
-    card.addEventListener("mouseleave", () => {
-      gsap.to(card, {
-        scale: 1,
-        y: 0,
-        duration: 0.3,
-        ease: "power2.out",
-      });
     });
   });
 </script>
