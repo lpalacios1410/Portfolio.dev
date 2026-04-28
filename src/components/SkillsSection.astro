@@ -1,8 +1,11 @@
 ---
-import { Icon } from "astro-icon/components";
+import SkillCard from "./SkillCard.astro";
 ---
 
-<section class="skills py-12 mt-5 mb-5 relative scroll-mt-20 bg-gray-500/10">
+<section
+  class="skills py-12 mt-5 mb-5 relative scroll-mt-20"
+  style="background: var(--color-surface-container-low)"
+>
   <div class="mb-16 text-center">
     <div class="flex items-center justify-center gap-4 mb-4">
       <h2
@@ -19,159 +22,44 @@ import { Icon } from "astro-icon/components";
         class="col-span-4 md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
       >
         <!-- Frontend Stack -->
-        <div
-          class="cardSkill rounded-2xl overflow-hidden transition-transform duration-300 border-t-4 border-blue-500 bg-gray-500/30 dark:"
-          style=""
-        >
-          <div class="bg-black/40">
-            <div class="flex items-center gap-8 p-2 border-b mb-3">
-              <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              </div>
-              <h4
-                class="font-label text-lg font-bold tracking-tight w-1/2 text-center text-white/80"
-              >
-                FRONTEND
-              </h4>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4">
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="html" class="w-15 h-12" />HTML 5
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="css" class="w-15 h-12" />CSS 3
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="javascript" class="w-15 h-12" />JavaScript
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="react" class="w-15 h-12" />React
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="astro" class="w-15 h-12" />Astro
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="tailwindcss" class="w-15 h-12" />Tailwind
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="bootstrap" class="w-15 h-12" />Bootstrap
-            </div>
-          </div>
-        </div>
+        <SkillCard
+          title="FRONTEND"
+          borderColor="border-blue-500"
+          icons={[
+            { name: "html", label: "HTML 5" },
+            { name: "css", label: "CSS 3" },
+            { name: "javascript", label: "JavaScript" },
+            { name: "react", label: "React" },
+            { name: "astro", label: "Astro" },
+            { name: "tailwindcss", label: "Tailwind" },
+            { name: "bootstrap", label: "Bootstrap" },
+          ]}
+        />
         <!-- Backend Stack -->
-        <div
-          class="cardSkill rounded-2xl overflow-hidden transition-transform duration-300 border-t-4 border-green-500 bg-gray-500/30"
-        >
-          <div class="bg-black/40">
-            <div class="flex items-center gap-8 p-2 border-b mb-3">
-              <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              </div>
-              <h4
-                class="font-label text-lg font-bold tracking-tight w-1/2 text-center text-white/80"
-              >
-                BACKEND
-              </h4>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4">
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="nodejs" class="w-15 h-12" />Node JS
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="expressjs" class="w-15 h-12" />Express
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="python" class="w-15 h-12" />Python
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="postgresql" class="w-15 h-12" />PostgreSQL
-            </div>
-          </div>
-        </div>
+        <SkillCard
+          title="BACKEND"
+          borderColor="border-green-500"
+          icons={[
+            { name: "nodejs", label: "Node JS" },
+            { name: "expressjs", label: "Express" },
+            { name: "python", label: "Python" },
+            { name: "postgresql", label: "PostgreSQL" },
+          ]}
+        />
         <!-- Tools Stack -->
-        <div
-          class="cardSkill rounded-2xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 border-t-4 border-red-500 bg-gray-500/30"
-        >
-          <div class="bg-black/40">
-            <div class="flex items-center gap-8 p-2 border-b mb-3">
-              <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              </div>
-              <h4
-                class="font-label text-lg font-bold tracking-tight w-1/2 text-center text-white/80"
-              >
-                HERRAMIENTAS
-              </h4>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4">
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="github" class="w-15 h-12" />Github
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="git" class="w-15 h-12" />Git
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="copilot" class="w-15 h-12" />Copilot
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="vscode" class="w-15 h-12" />VSCode
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="postman" class="w-15 h-12" />Postman
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="docker" class="w-15 h-12" />Docker
-            </div>
-            <div
-              class="flex items-center justify-center flex-col font-bold transition duration-200 hover:scale-110 cursor-pointer"
-            >
-              <Icon name="playwright" class="w-15 h-12" />Playwright
-            </div>
-          </div>
-        </div>
+        <SkillCard
+          title="HERRAMIENTAS"
+          borderColor="border-red-500"
+          icons={[
+            { name: "github", label: "Github" },
+            { name: "git", label: "Git" },
+            { name: "copilot", label: "Copilot" },
+            { name: "vscode", label: "VSCode" },
+            { name: "postman", label: "Postman" },
+            { name: "docker", label: "Docker" },
+            { name: "playwright", label: "Playwright" },
+          ]}
+        />
       </div>
     </div>
   </div>
