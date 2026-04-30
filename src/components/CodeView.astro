@@ -1,137 +1,146 @@
 <section
-  class="max-w-7xl mx-auto px-8 overflow-hidden mt-10"
+  class="max-w-7xl mx-auto px-4 sm:px-8 mt-10"
   aria-label="Visualización de código"
 >
   <div
-    class="flex gap-2 mb-2 pt-1"
+    class="flex gap-2 mb-2 pt-1 overflow-x-auto"
     role="tablist"
     aria-label="Seleccionar archivo de código"
   >
     <button
-      class="px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-500/20 text-blue-500"
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-500/20 text-blue-500 whitespace-nowrap"
       role="tab"
       aria-selected="true"
-      aria-controls="code-container">frontend.js</button
+      aria-controls="code-container">frontend.js</button>
     >
     <button
-      class="px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-green-400 hover:opacity-80 bg-gray-500/20 text-green-500"
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-green-400 hover:opacity-80 bg-gray-500/20 text-green-500 whitespace-nowrap"
       role="tab"
       aria-selected="false"
-      aria-controls="code-container">backend.py</button
+      aria-controls="code-container">backend.py</button>
     >
     <button
-      class="px-4 py-1 sm:visible invisible rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-red-400 bg-gray-500/20 hover:opacity-80 text-red-500"
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-red-400 bg-gray-500/20 hover:opacity-80 text-red-500 whitespace-nowrap"
       role="tab"
       aria-selected="false"
-      aria-controls="code-container">database.sql</button
+      aria-controls="code-container">database.sql</button>
     >
   </div>
   <div
-    class="p-6 rounded-2xl border shadow-2xl relative"
+    class="rounded-2xl border shadow-2xl relative overflow-hidden"
     style="background: var(--color-surface-container-low); border-color: var(--color-outline-variant)"
     role="tabpanel"
     id="code-container"
     aria-label="Código del desarrollador"
   >
-    <div class="flex gap-2 mb-6" aria-hidden="true">
-      <div class="w-3 h-3 rounded-full bg-red-500/40"></div>
-      <div class="w-3 h-3 rounded-full bg-green-500/40"></div>
-      <div class="w-3 h-3 rounded-full bg-blue-500/40"></div>
+    <div class="flex gap-2 mb-4 sm:mb-6 p-3 sm:p-6" aria-hidden="true">
+      <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/40"></div>
+      <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/40"></div>
+      <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-blue-500/40"></div>
     </div>
 
     <div
-      class="bg-[#0d1117] p-6 rounded-2xl border border-outline-variant/10 shadow-2xl relative"
+      class="overflow-x-auto -mt-2"
     >
       <div
-        class="font-['ui-monospace'] text-sm md:text-base leading-loose text-white/80"
-        aria-label="Código JavaScript que representa el perfil del desarrollador"
+        class="p-3 sm:p-6 min-w-max"
+        style="background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem;"
       >
-        <p
-          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-green-500"
+        <div
+          class="font-['ui-monospace'] text-xs sm:text-sm leading-relaxed sm:leading-loose text-white/80"
+          aria-label="Código JavaScript que representa el perfil del desarrollador"
         >
-          <span class="line-content">
-            <span class="text-blue-400">const</span>
-            <span class="text-green-500">architect</span> = &#123;
-          </span>
-        </p>
+          <p
+            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-green-500"
+          >
+            <span class="line-content">
+              <span class="text-blue-400">const</span>
+              <span class="text-green-500">architect</span> = &#123;
+            </span>
+          </p>
 
-        <p
-          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          <p
+            class="typewriter-line ml-4 sm:ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">
+              name: <span class="text-green-500">"L. Palacios"</span>,
+            </span>
+          </p>
+
+          <p
+            class="typewriter-line ml-4 sm:ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">
+              role: <span class="text-green-500">"Full Stack Developer Jr"</span>,
+            </span>
+          </p>
+
+          <p
+            class="typewriter-line ml-4 sm:ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">
+              focus: [<span class="text-green-500">"Architecture"</span>, <span
+                class="text-green-500">"Performance"</span
+              >, <span class="text-green-500">"UI"</span>],
+            </span>
+          </p>
+
+          <p
+            class="typewriter-line ml-4 sm:ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">
+              status: <span class="text-green-500"
+                >"Open for Collaboration"</span>
+              >
+            </span>
+          </p>
+
+          <p
+            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">&#125;;</span>
+          </p>
+
+          <br />
+
+          <p
+            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">
+              <span class="text-purple-400">while</span>(architect.active) &#123;
+            </span>
+          </p>
+
+          <p
+            class="typewriter-line ml-4 sm:ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent text-gray-500 italic"
+          >
+            <span class="line-content"
+              >// Engineering the future of the web</span>
+            >
+          </p>
+
+          <p
+            class="typewriter-line ml-4 sm:ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">
+              architect.<span class="text-blue-400">build</span>(modernSolutions);
+            </span>
+          </p>
+
+          <p
+            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+          >
+            <span class="line-content">&#125;</span>
+          </p>
+        </div>
+
+        <span
+          class="absolute right-4 sm:right-10 bottom-4 sm:bottom-10 opacity-5 text-4xl sm:text-6xl font-black italic text-white select-none"
+          aria-hidden="true"
         >
-          <span class="line-content">
-            name: <span class="text-green-500">"L. Palacios"</span>,
-          </span>
-        </p>
-
-        <p
-          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">
-            role: <span class="text-green-500">"Full Stack Developer Jr"</span>,
-          </span>
-        </p>
-
-        <p
-          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">
-            focus: [<span class="text-green-500">"Architecture"</span>, <span
-              class="text-green-500">"Performance"</span
-            >, <span class="text-green-500">"UI"</span>],
-          </span>
-        </p>
-
-        <p
-          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">
-            status: <span class="text-green-500">"Open for Collaboration"</span>
-          </span>
-        </p>
-
-        <p
-          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">&#125;;</span>
-        </p>
-
-        <br />
-
-        <p
-          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">
-            <span class="text-purple-400">while</span>(architect.active) &#123;
-          </span>
-        </p>
-
-        <p
-          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent text-gray-500 italic"
-        >
-          <span class="line-content">// Engineering the future of the web</span>
-        </p>
-
-        <p
-          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">
-            architect.<span class="text-blue-400">build</span>(modernSolutions);
-          </span>
-        </p>
-
-        <p
-          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-        >
-          <span class="line-content">&#125;</span>
-        </p>
+          DEPLOY
+        </span>
       </div>
-
-      <span
-        class="deploy-text absolute right-10 bottom-10 opacity-5 text-6xl font-black italic text-white select-none"
-        aria-hidden="true"
-      >
-        DEPLOY
-      </span>
     </div>
 
     <style>
