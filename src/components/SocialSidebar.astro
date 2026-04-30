@@ -1,0 +1,88 @@
+---
+const socialLinks = [
+  {
+    name: "GitHub",
+    icon: "github",
+    url: "https://github.com/lpalacios1410",
+    label: "Perfil de GitHub",
+  },
+  {
+    name: "LinkedIn",
+    icon: "linkedin",
+    url: "https://www.linkedin.com/in/luis-palacios-739b1b15a/",
+    label: "Perfil de LinkedIn",
+  },
+  {
+    name: "Email",
+    icon: "email",
+    url: "luisarmando20092009@gmail.com",
+    label: "Enviar correo electrónico",
+  },
+];
+---
+
+<aside
+  class="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col gap-4"
+  aria-label="Enlaces a redes sociales"
+>
+  <div
+    class="bg-black/40 backdrop-blur-md rounded-2xl p-3 flex flex-col gap-3 border border-outline-variant/30 shadow-lg"
+    role="list"
+    aria-label="Lista de redes sociales"
+  >
+    {
+      socialLinks.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container hover:bg-primary/20 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary"
+          role="listitem"
+          aria-label={link.label}
+          title={link.name}
+        >
+          {link.icon === "github" && (
+            <img
+              src={"/src/icons/github.svg"}
+              alt="GitHub"
+              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+            />
+          )}
+          {link.icon === "linkedin" && (
+            <img
+              src={"/src/icons/linkedin.svg"}
+              alt="LinkedIn"
+              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+            />
+          )}
+          {link.icon === "email" && (
+            <svg
+              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.74a2 2 0 0 1-2.06 0L2 7" />
+            </svg>
+          )}
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="mt-4 flex flex-col items-center gap-2" aria-hidden="true">
+    <div class="w-px h-16 bg-green-500"></div>
+    <span class="text-xs font-mono text-green-500 vertical-text">SÍGUEME</span>
+  </div>
+</aside>
+
+<style>
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.2em;
+  }
+</style>
