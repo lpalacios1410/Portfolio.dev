@@ -1,84 +1,50 @@
 ---
 const { pathname } = Astro.url;
-const currentPath = pathname.replace(/\/$/, "");
+const currentPath = pathname.replace(/\//, "");
 
 const navItems = [
   { name: "Home", href: "#home" },
-  { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
+  { name: "Projects", href: "#projects" },
+  { name: "Formacion", href: "#formacion" },
 ];
 ---
 
-<header id="home">
+<header id="header">
   <nav
-    class="bg-zinc-950/70 backdrop-blur-xl fixed top-0 left-0 w-full z-50 border-gray-200 px-4 sm:px-6 py-2.5 dark:bg-gray-900/10 dark:bg-linear-to-b dark:from-blue-900/30 to-transparent"
+    class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-3 transition-all duration-300 backdrop-blur-md"
+    style="background: linear-gradient(to bottom, var(--color-surface), var(--color-surface-container-low)); border-bottom: 1px solid var(--color-outline-variant)"
   >
-    <div class="flex flex-wrap justify-between items-center mx-auto max-w-5xl">
-      <a href="https://flowbite.com" class="flex items-center">
-        <p class="text-4xl mr-2 mb-2">🤖</p>
-        <span
-          class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-          >L. Palacios</span
-        >
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-7xl">
+      <a href="#home" class="flex items-center gap-2">
+        <span class="text-2xl">🤖</span>
+        <span class="text-xl font-bold" style="color: var(--color-on-surface)">L. Palacios</span>
       </a>
-      <div class="flex items-center sm:order-2">
-        <!-- <a
-          href="#"
-          class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded sm text-sm px-4 sm:px-5 py-2 sm:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-          >RESUMEN</a
-        > -->
-      </div>
 
-      <!-- Button menu -->
-      <div>
-        <button
-          data-collapse-toggle="mobile-menu-2"
-          type="button"
-          class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="mobile-menu-2"
-          aria-expanded="false"
-        >
-          <svg
-            class="w-6 h-6"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </button>
-      </div>
-      <!-- Button menu -->
-
-      <div
-        class="hidden justify-between items-center w-full sm:flex sm:w-auto sm:order-1 gap-15"
-        id="mobile-menu-2"
+      <button
+        data-collapse-toggle="mobile-menu"
+        type="button"
+        class="inline-flex items-center p-2 ml-1 text-sm rounded-lg sm:hidden"
+        style="color: var(--color-on-surface-variant)"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
       >
-        {
-          navItems.map((item) => (
-            <a
-              href={item.href}
-              class:list={[
-                "text-xl font-bold tracking-widest",
-                currentPath === item.href
-                  ? "text-white underline decoration-2 underline-offset-8"
-                  : "hover:text-gray-300 text-gray-500 transition-colors",
-              ]}
-              aria-current={currentPath === item.href ? "page" : undefined}
-            >
-              {item.name}
-            </a>
-          ))
-        }
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <div class="hidden justify-between items-center w-full sm:flex sm:w-auto gap-8" id="mobile-menu">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-base font-medium tracking-wide transition-colors"
+            style={currentPath === item.href ? "color: var(--color-green-500);" : "color: var(--color-on-surface-variant);"}
+          >
+            {item.name}
+          </a>
+        ))}
       </div>
     </div>
   </nav>
 </header>
-
-<style></style>
-<script></script>
