@@ -3,43 +3,48 @@ const { pathname } = Astro.url;
 const currentPath = pathname.replace(/\//, "");
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Formacion", href: "#formacion" },
+  { name: "Inicio", href: "#home" },
+  { name: "Habilidades", href: "#skills" },
+  { name: "Proyectos", href: "#projects" },
+  { name: "Formación", href: "#formacion" },
 ];
 ---
 
-<header id="header">
+<header id="header" role="banner">
   <nav
     class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-3 transition-all duration-300 backdrop-blur-md"
     style="background: linear-gradient(to bottom, var(--color-surface), var(--color-surface-container-low)); border-bottom: 1px solid var(--color-outline-variant)"
+    role="navigation"
+    aria-label="Navegación principal"
   >
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-7xl">
-      <a href="#home" class="flex items-center gap-2">
-        <span class="text-2xl">🤖</span>
+      <a href="#home" class="flex items-center gap-2" aria-label="Ir a inicio - L. Palacios">
+        <span class="text-2xl" aria-hidden="true">🤖</span>
         <span class="text-xl font-bold" style="color: var(--color-on-surface)">L. Palacios</span>
       </a>
 
       <button
         data-collapse-toggle="mobile-menu"
         type="button"
-        class="inline-flex items-center p-2 ml-1 text-sm rounded-lg sm:hidden"
+        class="inline-flex items-center p-2 ml-1 text-sm rounded-lg sm:hidden focus:outline-none focus:ring-2 focus:ring-primary"
         style="color: var(--color-on-surface-variant)"
         aria-controls="mobile-menu"
         aria-expanded="false"
+        aria-label="Abrir menú de navegación"
       >
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
         </svg>
       </button>
 
-      <div class="hidden justify-between items-center w-full sm:flex sm:w-auto gap-8" id="mobile-menu">
+      <div class="hidden justify-between items-center w-full sm:flex sm:w-auto gap-8" id="mobile-menu" role="menu">
         {navItems.map((item) => (
           <a
             href={item.href}
-            class="text-base font-medium tracking-wide transition-colors"
+            class="text-base font-medium tracking-wide transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
             style={currentPath === item.href ? "color: var(--color-green-500);" : "color: var(--color-on-surface-variant);"}
+            role="menuitem"
+            aria-current={currentPath === item.href ? "page" : undefined}
           >
             {item.name}
           </a>

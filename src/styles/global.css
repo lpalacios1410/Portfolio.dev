@@ -33,20 +33,6 @@
   --color-blue-400: oklch(0.7 0.15 220);
 }
 
-.light {
-  --color-surface: oklch(0.98 0.01 280);
-  --color-surface-container-lowest: oklch(1 0 0);
-  --color-surface-container-low: oklch(0.95 0.01 280);
-  --color-surface-container: oklch(0.92 0.01 280);
-  --color-surface-container-high: oklch(0.88 0.01 280);
-  --color-on-surface: oklch(0.15 0.05 280);
-  --color-on-surface-variant: oklch(0.45 0.05 280);
-  --color-primary: oklch(0.55 0.15 150);
-  --color-on-primary: oklch(1 0 0);
-  --color-outline-variant: oklch(0.75 0.02 280);
-  --color-green-500: oklch(0.58 0.18 150);
-  --color-blue-400: oklch(0.6 0.15 220);
-}
 
 html {
   font-family: "Onest Variable", system-ui, sans-serif;
@@ -57,4 +43,33 @@ body {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip link is already in Layout.astro */
+
+/* Reduced motion support - keep animations running but instant */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improved selection colors */
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
 }

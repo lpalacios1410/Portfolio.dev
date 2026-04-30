@@ -1,227 +1,226 @@
-<section class="max-w-7xl mx-auto px-8 overflow-hidden mt-10">
-  <div class="flex gap-2 mb-2">
+<section
+  class="max-w-7xl mx-auto px-8 overflow-hidden mt-10"
+  aria-label="Visualización de código"
+>
+  <div
+    class="flex gap-2 mb-2 pt-1"
+    role="tablist"
+    aria-label="Seleccionar archivo de código"
+  >
     <button
-      class="px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-blue-400 focus:outline-none"
-      style="background: var(--color-surface-container-high); color: var(--color-primary)"
-      >frontend.js</button
+      class="px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-500/20 text-blue-500"
+      role="tab"
+      aria-selected="true"
+      aria-controls="code-container">frontend.js</button
     >
     <button
-      class="px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none hover:opacity-80"
-      style="background: var(--color-surface-container-high); color: var(--color-green-500)"
-      >backend.py</button
+      class="px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-green-400 hover:opacity-80 bg-gray-500/20 text-green-500"
+      role="tab"
+      aria-selected="false"
+      aria-controls="code-container">backend.py</button
     >
     <button
-      class="px-4 py-1 sm:visible invisible rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none"
-      style="background: var(--color-surface-container-high); color: #eab308"
-      >database.sql</button
+      class="px-4 py-1 sm:visible invisible rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-red-400 bg-gray-500/20 hover:opacity-80 text-red-500"
+      role="tab"
+      aria-selected="false"
+      aria-controls="code-container">database.sql</button
     >
   </div>
   <div
     class="p-6 rounded-2xl border shadow-2xl relative"
     style="background: var(--color-surface-container-low); border-color: var(--color-outline-variant)"
+    role="tabpanel"
+    id="code-container"
+    aria-label="Código del desarrollador"
   >
-    <div class="flex gap-2 mb-6">
-      <div class="w-3 h-3 rounded-full" style="background: rgba(239,68,68,0.4)">
-      </div>
-      <div class="w-3 h-3 rounded-full" style="background: rgba(34,197,94,0.4)">
-      </div>
-      <div
-        class="w-3 h-3 rounded-full"
-        style="background: rgba(59,130,246,0.4)"
-      >
-      </div>
+    <div class="flex gap-2 mb-6" aria-hidden="true">
+      <div class="w-3 h-3 rounded-full bg-red-500/40"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500/40"></div>
+      <div class="w-3 h-3 rounded-full bg-blue-500/40"></div>
     </div>
+
     <div
-      class="relative rounded-xl overflow-hidden border shadow-2xl p-4 md:p-8"
-      style="background: #0d1117; border-color: var(--color-outline-variant)"
+      class="bg-[#0d1117] p-6 rounded-2xl border border-outline-variant/10 shadow-2xl relative"
     >
-      <button
-        class="px-4 py-1 rounded-t-lg bg-gray-800 text-green-400 font-mono text-xs hover:bg-gray-700 transition cursor-pointer border-b-2 border-transparent focus:outline-none"
-        >backend.py</button
-      >
-      <button
-        class="px-4 py-1 sm:visible invisible rounded-t-lg bg-gray-800 text-yellow-400 font-mono text-xs hover:bg-gray-700 transition cursor-pointer border-b-2 border-transparent focus:outline-none"
-        >database.sql</button
-      >
-    </div>
-    <div
-      class="bg-gray-900/50 p-6 rounded-2xl border border-outline-variant/10 shadow-2xl relative"
-    >
-      <div class="flex gap-2 mb-6">
-        <div class="w-3 h-3 rounded-full bg-red-500/40"></div>
-        <div class="w-3 h-3 rounded-full bg-green-500/40"></div>
-        <div class="w-3 h-3 rounded-full bg-blue-500/40"></div>
-      </div>
       <div
-        class="relative bg-[#0d1117] rounded-xl overflow-hidden border border-white/10 shadow-2xl p-4 md:p-8"
+        class="font-['ui-monospace'] text-sm md:text-base leading-loose text-white/80"
+        aria-label="Código JavaScript que representa el perfil del desarrollador"
       >
-        <div
-          id="code-container"
-          class="font-['ui-monospace'] text-sm md:text-base leading-loose text-white/80"
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-green-500"
         >
-          <p
-            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-green-500"
-          >
-            <span class="line-content">
-              <span class="text-blue-400">const</span>
-              <span class="text-green-500">architect</span> = &#123;
-            </span>
-          </p>
+          <span class="line-content">
+            <span class="text-blue-400">const</span>
+            <span class="text-green-500">architect</span> = &#123;
+          </span>
+        </p>
 
-          <p
-            class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">
-              name: <span class="text-green-500">"L. Palacios"</span>,
-            </span>
-          </p>
-
-          <p
-            class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">
-              role: <span class="text-green-500">"Full Stack Developer Jr"</span
-              >,
-            </span>
-          </p>
-
-          <p
-            class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">
-              focus: [<span class="text-green-500">"Architecture"</span>, <span
-                class="text-green-500">"Performance"</span
-              >, <span class="text-green-500">"UI"</span>],
-            </span>
-          </p>
-
-          <p
-            class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">
-              status: <span class="text-green-500"
-                >"Open for Collaboration"</span
-              >
-            </span>
-          </p>
-
-          <p
-            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">&#125;;</span>
-          </p>
-
-          <br />
-
-          <p
-            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">
-              <span class="text-purple-400">while</span>(architect.active)
-              &#123;
-            </span>
-          </p>
-
-          <p
-            class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent text-gray-500 italic"
-          >
-            <span class="line-content"
-              >// Engineering the future of the web</span
-            >
-          </p>
-
-          <p
-            class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">
-              architect.<span class="text-blue-400">build</span
-              >(modernSolutions);
-            </span>
-          </p>
-
-          <p
-            class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
-          >
-            <span class="line-content">&#125;</span>
-          </p>
-        </div>
-
-        <span
-          class="deploy-text absolute right-10 bottom-10 opacity-5 text-6xl font-black italic text-white select-none"
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
         >
-          DEPLOY
-        </span>
+          <span class="line-content">
+            name: <span class="text-green-500">"L. Palacios"</span>,
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            role: <span class="text-green-500">"Full Stack Developer Jr"</span>,
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            focus: [<span class="text-green-500">"Architecture"</span>, <span
+              class="text-green-500">"Performance"</span
+            >, <span class="text-green-500">"UI"</span>],
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            status: <span class="text-green-500">"Open for Collaboration"</span>
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">&#125;;</span>
+        </p>
+
+        <br />
+
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            <span class="text-purple-400">while</span>(architect.active) &#123;
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent text-gray-500 italic"
+        >
+          <span class="line-content">// Engineering the future of the web</span>
+        </p>
+
+        <p
+          class="typewriter-line ml-8 relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">
+            architect.<span class="text-blue-400">build</span>(modernSolutions);
+          </span>
+        </p>
+
+        <p
+          class="typewriter-line relative overflow-hidden whitespace-nowrap w-0 border-r-2 border-transparent"
+        >
+          <span class="line-content">&#125;</span>
+        </p>
       </div>
 
-      <style>
-        /* Asegura que el texto no se ajuste a la línea siguiente mientras se escribe */
-        .typewriter-line {
-          display: block;
-          font-family: "ui-monospace", monospace;
-        }
-        .line-content {
-          display: inline-block;
-          visibility: hidden; /* Oculto inicialmente */
-        }
-      </style>
+      <span
+        class="deploy-text absolute right-10 bottom-10 opacity-5 text-6xl font-black italic text-white select-none"
+        aria-hidden="true"
+      >
+        DEPLOY
+      </span>
     </div>
 
-    <script>
-      import { gsap } from "gsap";
+    <style>
+      /* Asegura que el texto no se ajuste a la línea siguiente mientras se escribe */
+      .typewriter-line {
+        display: block;
+        font-family: "ui-monospace", monospace;
+        will-change: width;
+      }
+      .line-content {
+        display: inline-block;
+        visibility: hidden; /* Oculto inicialmente */
+      }
+    </style>
+  </div>
 
-      const initTypewriterLoop = () => {
-        const lines = document.querySelectorAll(".typewriter-line");
+  <script>
+    import { gsap } from "gsap";
+    import {
+      prefersReducedMotion,
+      getReducedMotionConfig,
+    } from "../utils/gsap-utils";
 
-        // 1. Preparación: Medir y configurar estados iniciales
-        lines.forEach((line) => {
-          const content = line.querySelector(".line-content");
-          // Hacemos visible el contenido internamente para medirlo
-          gsap.set(content, { visibility: "visible" });
-          // Guardamos el ancho real en un atributo de datos
-          (line as HTMLElement).dataset.width =
-            (content as HTMLElement).offsetWidth + "px";
-          // Volvemos a ocultar el contenedor principal
-          gsap.set(line, { width: 0 });
+    const initTypewriterLoop = () => {
+      const lines = document.querySelectorAll(".typewriter-line");
+      const motionConfig = getReducedMotionConfig();
+      const prefersReduced = prefersReducedMotion();
+
+      // 1. Preparación: Medir y configurar estados iniciales
+      lines.forEach((line) => {
+        const content = line.querySelector(".line-content");
+        // Hacemos visible el contenido internamente para medirlo
+        gsap.set(content, {
+          visibility: "visible",
+          willChange: "transform, opacity",
         });
+        // Guardamos el ancho real en un atributo de datos
+        (line as HTMLElement).dataset.width =
+          (content as HTMLElement).offsetWidth + "px";
+        // Volvemos a ocultar el contenedor principal
+        gsap.set(line, { width: 0, willChange: "width" });
+      });
 
-        // 2. Crear la Línea de Tiempo Principal (Timeline)
-        // repeat: -1 crea el bucle infinito
-        // repeatDelay: 2 da una pausa de 2s antes de reiniciar
-        // yoyo: true hace que se borre (animación a la inversa)
-        const masterTl = gsap.timeline({
-          repeat: -1,
-          yoyo: true,
-          repeatDelay: 2,
+      // Si prefiere movimiento reducido, mostrar todo el código instantáneamente
+      if (prefersReduced) {
+        gsap.set(".typewriter-line", {
+          width: "auto",
+          borderRightColor: "transparent",
         });
+        gsap.set(".line-content", { visibility: "visible" });
+        return;
+      }
 
-        // 3. Añadir animaciones para cada línea
-        lines.forEach((line, index) => {
-          const targetWidthStr = (line as HTMLElement).dataset.width;
-          const targetWidth = targetWidthStr ? parseFloat(targetWidthStr) : 0;
+      // 2. Crear la Línea de Tiempo Principal (Timeline)
+      const masterTl = gsap.timeline({
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 2,
+        ...motionConfig,
+      });
 
-          // Animación de escritura de la línea actual
-          masterTl.to(line, {
+      // 3. Añadir animaciones para cada línea
+      lines.forEach((line, index) => {
+        const targetWidthStr = (line as HTMLElement).dataset.width;
+        const targetWidth = targetWidthStr ? parseFloat(targetWidthStr) : 0;
+
+        // Animación de escritura de la línea actual
+        masterTl.to(
+          line,
+          {
             width: `${targetWidth}px`,
-            duration: targetWidth * 0.01, // Velocidad basada en la longitud (más caracteres = más tiempo)
-            ease: "none", // Velocidad constante para parecer escritura
+            duration: Math.max(targetWidth * 0.008, 0.3), // Velocidad basada en la longitud
+            ease: "none",
             onStart: () => {
-              // Mostramos el cursor en la línea actual
-              gsap.set(line, { borderRightColor: "#22c55e" }); // green-500
+              gsap.set(line, { borderRightColor: "#22c55e" });
             },
             onComplete: () => {
-              // Ocultamos el cursor al terminar la línea, excepto si es la última
               if (index < lines.length - 1) {
                 gsap.set(line, { borderRightColor: "transparent" });
               }
             },
-          });
-        });
-      };
+          },
+          0.1,
+        ); // Pequeño retraso entre líneas
+      });
+    };
 
-      // Ejecución segura en Astro
-      document.addEventListener("astro:page-load", initTypewriterLoop);
-      // Ejecución inicial por si acaso
-      initTypewriterLoop();
-    </script>
-  </div>
+    // Ejecución segura en Astro
+    document.addEventListener("astro:page-load", initTypewriterLoop);
+    initTypewriterLoop();
+  </script>
 </section>

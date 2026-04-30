@@ -1,28 +1,26 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <section
   class="box max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-12 place-items-center min-h-screen pt-20"
   id="home"
+  aria-label="Sección principal de presentación"
 >
-  <ThemeToggle />
-
   <div
     class="left-side md:col-span-7 space-y-8 flex flex-col justify-center items-center md:items-start text-center md:text-left"
   >
     <div class="space-y-4">
-      <span class="badge-text text-sm tracking-[0.4em] font-medium uppercase"
+      <span class="badge-text text-sm tracking-[0.4em] font-medium uppercase text-on-surface-variant"
         >Ingeniero de Software
       </span>
       <h1
-        class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black max-w-xs lg:max-w-xl tracking-tighter leading-tight"
+        class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black max-w-xs lg:max-w-xl tracking-tighter leading-tight text-on-surface"
       >
         <span class="title-line block">Desarrollador</span>
         <span class="title-line block text-green-500">Full-Stack Jr</span>
       </h1>
     </div>
-    <p class="hero-description text-xl max-w-2xl">
+    <p class="hero-description text-xl max-w-2xl text-on-surface-variant">
       Desarrollador full-stack especializado en la creación de soluciones
       digitales a medida. Aunque estoy en las primeras etapas de mi carrera como
       desarrollador, creo tener una base sólida para crear productos
@@ -34,20 +32,22 @@ import ThemeToggle from "./ThemeToggle.astro";
         target="_blank"
         rel="noopener noreferrer"
         download="CV-LuisPalacios2026.pdf"
-        class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-all duration-700"
+        class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-all duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        aria-label="Descargar currículum vitae en formato PDF"
       >
         Descargar CV
       </a>
     </div>
   </div>
-  <div class="rigth-side md:col-span-5 relative group">
+  <div class="rigth-side md:col-span-5 relative group" aria-hidden="true">
     <div
-      class="relative p-1 rounded-4xl shadow-xl border bg-linear-to-t from-transparent to-transparent group-hover:from-green-500 group-hover:to-green-500/10 transition-all duration-500"
+      class="relative p-1 rounded-4xl shadow-xl border bg-linear-to-t from-transparent to-transparent group-hover:from-green-500 group-hover:to-green-500/10 transition-all duration-500 will-change-transform"
     >
       <img
-        class="w-full h-125 object-cover rounded-4xl grayscale hover:grayscale-0 transition-all duration-500"
-        data-alt="Professional studio portrait of a modern software engineer in a dark tech-focused environment with subtle blue rim lighting"
+        class="w-full h-auto md:h-125 object-cover rounded-4xl grayscale hover:grayscale-0 transition-all duration-500"
         src="developer.jpg"
+        alt="Luis Palacios - Desarrollador Full-Stack"
+        loading="eager"
       />
     </div>
   </div>
@@ -56,63 +56,82 @@ import ThemeToggle from "./ThemeToggle.astro";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { prefersReducedMotion } from "../utils/gsap-utils";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  const prefersReduced = prefersReducedMotion();
 
-  tl.from(".badge-text", {
-    duration: 0.8,
-    opacity: 0,
-    y: -20,
+  // Set initial states with gsap.set for better performance
+  gsap.set(".badge-text", { opacity: 0, y: -20, willChange: "transform, opacity" });
+  gsap.set(".title-line", { opacity: 0, x: -50, willChange: "transform, opacity" });
+  gsap.set(".hero-description", { opacity: 0, y: 20, willChange: "transform, opacity" });
+  gsap.set(".hero-cta", { opacity: 0, scale: 0.9, willChange: "transform, opacity" });
+  gsap.set(".rigth-side", { opacity: 0, x: 100, rotation: 5, willChange: "transform, opacity" });
+
+  const tl = gsap.timeline({
+    defaults: {
+      ease: prefersReduced ? "none" : "power3.out",
+      duration: prefersReduced ? 0.01 : undefined,
+    },
+  });
+
+  tl.to(".badge-text", {
+    duration: prefersReduced ? 0.01 : 0.8,
+    opacity: 1,
+    y: 0,
     stagger: 0.1,
   })
-    .from(
+    .to(
       ".title-line",
       {
-        duration: 1,
-        opacity: 0,
-        x: -50,
+        duration: prefersReduced ? 0.01 : 1,
+        opacity: 1,
+        x: 0,
         stagger: 0.2,
       },
       "-=0.4",
     )
-    .from(
+    .to(
       ".hero-description",
       {
-        duration: 0.8,
-        opacity: 0,
-        y: 20,
+        duration: prefersReduced ? 0.01 : 0.8,
+        opacity: 1,
+        y: 0,
       },
       "-=0.5",
     )
-    .from(
+    .to(
       ".hero-cta",
       {
-        duration: 0.6,
+        duration: prefersReduced ? 0.01 : 0.6,
         opacity: 1,
-        scale: 0.9,
+        scale: 1,
       },
       "-=0.3",
     )
-    .from(
+    .to(
       ".rigth-side",
       {
-        duration: 1.2,
-        opacity: 0,
-        x: 100,
-        rotation: 5,
+        duration: prefersReduced ? 0.01 : 1.2,
+        opacity: 1,
+        x: 0,
+        rotation: 0,
       },
       "-=0.8",
     );
 
-  gsap.to(".rigth-side", {
-    scrollTrigger: {
-      trigger: ".rigth-side",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1,
-    },
-    y: -50,
-  });
+  // Only add scroll animation if not preferring reduced motion
+  if (!prefersReduced) {
+    gsap.to(".rigth-side", {
+      scrollTrigger: {
+        trigger: ".rigth-side",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+      y: -50,
+      ease: "none",
+    });
+  }
 </script>
