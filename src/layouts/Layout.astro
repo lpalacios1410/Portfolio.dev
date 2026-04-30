@@ -1,39 +1,41 @@
 ---
 import "../styles/global.css";
+
+const {
+  title = "Luis.Dev",
+  description = "Portfolio de Luis Palacios - Desarrollador Full-Stack Jr especializado en soluciones digitales",
+} = Astro.props;
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || "https://portfolio-dev-nine-phi.vercel.app/",
+);
+const imageURL = new URL("/developer.jpg", Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="A showcase of my projects and skills." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="portfolio, projects, web development, design, front-end, JavaScript, React,
-  Tailwind CSS"
+      content="portfolio, proyectos, desarrollo web, full-stack, JavaScript, React, Astro, Tailwind CSS, Node.js"
     />
+    <link rel="canonical" href={canonicalURL} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>Luis.Dev</title>
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          return 'light';
-        }
-        return 'dark';
-      })();
-      if (theme === 'light') {
-        document.documentElement.classList.add('light');
-      } else {
-        document.documentElement.classList.remove('light');
-      }
-      window.localStorage.setItem('theme', theme);
-    </script>
+
+    <title>{title}</title>
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
   </head>
   <body>
     <slot />

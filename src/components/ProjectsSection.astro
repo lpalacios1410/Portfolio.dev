@@ -6,11 +6,12 @@ import javascript from "../icons/javascript.svg";
 import postgresql from "../icons/postgresql.svg";
 import CardProject from "./CardProject.astro";
 import imgProyecto1 from "../../public/onlygirlsccs.png";
+
 const projects = [
   {
     title: "E-commerce onlygirlsccs",
     subtitle: "App web",
-    category: "Gestion de productos",
+    category: "Gestión de productos",
     description:
       "Trabajo como repartidor para una tienda online en Caracas, Venezuela. También ayudé a crear un pequeño sistema para que nuestros clientes puedan ver nuestro catálogo. Esto nos permite dejar de depender de WhatsApp y ofrecer otras opciones.",
     languages: [
@@ -22,29 +23,34 @@ const projects = [
     ],
     status: "Activo",
     imageSrc: imgProyecto1,
-    imageAlt: "Captura de pantalla de la tienda online",
+    imageAlt: "Captura de pantalla de la tienda online OnlyGirlsCCS",
     urlProject: "https://github.com/lpalacios1410/OnlyGirlsCss-Ecommerce",
     urlDemo: "https://onlygirlsccs-ecommerce-frontend.vercel.app/",
   },
 ];
+
 ---
 
-<section class="max-w-7xl mx-auto px-8 py-20 scroll-mt-20" id="projects">
+<section class="max-w-7xl mx-auto px-8 py-20 scroll-mt-20" id="projects" aria-labelledby="projects-heading">
   <div
     class="mb-16 flex flex-col gap-5 md:flex-row items-baseline justify-between"
   >
     <h2
+      id="projects-heading"
       class="projects-title text-5xl font-black tracking-tighter text-on-surface"
     >
-      Featured Projects
+      Proyectos Destacados
     </h2>
     <div class="h-px bg-outline-variant/20 grow mx-8 hidden md:block"></div>
     <a
-      class="font-label text-sm text-primary uppercase tracking-widest hover:underline decoration-2 underline-offset-8"
-      href="#">View all projects</a
+      class="font-label text-sm text-primary uppercase tracking-widest hover:underline decoration-2 underline-offset-8 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-2 py-1"
+      href="#"
+      aria-label="Ver todos los proyectos en GitHub"
     >
+      Ver todos los proyectos
+    </a>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Lista de proyectos">
     {
       projects.map((project, index) => (
         <CardProject {...project} index={index} />
@@ -53,38 +59,45 @@ const projects = [
   </div>
 </section>
 
-<!-- SCRIPT DE GSAP -->
-
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { prefersReducedMotion } from "../utils/gsap-utils";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from(".projects-title", {
+  const prefersReduced = prefersReducedMotion();
+
+  // Set initial states
+  gsap.set(".projects-title", { opacity:0, x: -50, willChange: "transform, opacity" });
+  gsap.set(".project-card", { opacity:0, y: 80, scale: 0.95, willChange: "transform, opacity" });
+
+  gsap.to(".projects-title", {
     scrollTrigger: {
       trigger: "#projects",
       start: "top 80%",
     },
-    opacity: 0,
-    x: -50,
-    duration: 0.8,
-    ease: "power3.out",
+    opacity: 1,
+    x: 0,
+    duration: prefersReduced ? 0.01 : 0.8,
+    ease: prefersReduced ? "none" : "power3.out",
   });
 
-  gsap.utils.toArray(".project-card").forEach((card: any, i: number) => {
-    gsap.from(card, {
+  const cards = gsap.utils.toArray(".project-card");
+
+  cards.forEach((card: any, i: number) => {
+    gsap.to(card, {
       scrollTrigger: {
         trigger: card,
         start: "top 90%",
         toggleActions: "play none none reverse",
       },
-      opacity: 0,
-      y: 80,
-      scale: 0.95,
-      duration: 0.8,
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: prefersReduced ? 0.01 : 0.8,
       delay: i * 0.15,
-      ease: "power2.out",
+      ease: prefersReduced ? "none" : "power2.out",
     });
   });
 </script>

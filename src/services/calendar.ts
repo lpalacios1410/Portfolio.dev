@@ -16,55 +16,64 @@ export interface CalendarData {
   weeks: ContributionWeek[];
 }
 
+export type CalendarResult = CalendarData | null;
+
+export type FetchStatus = "idle" | "loading" | "success" | "error";
+
+export interface CalendarError {
+  message: string;
+  code?: string;
+}
 
 console.log("token usado", GITHUB_TOKEN ? "SI" : "NO");
 
-export const getCalendarData = async () => {
-  const query = `
-    query($login: String!) {
-      user(login: $login) {
-        contributionsCollection {
-          contributionCalendar {
-            totalContributions
-            weeks {
-              contributionDays {
-                contributionCount
-                date
-                color
+export const getCalendarData = async (): Promise<CalendarResult> => {
+  try {
+    const query = `
+      query($login: String!) {
+        user(login: $login) {
+          contributionsCollection {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  contributionCount
+                  date
+                  color
+                }
               }
             }
           }
         }
       }
+    `;
+
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, variables: { login: GITHUB_USERNAME } }),
+    });
+
+    const result = await response.json();
+
+    if (result.errors) {
+      console.error("✖️Error de github", result.errors);
+      return null;
     }
-  `;
 
-  const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${GITHUB_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query, variables: { login: GITHUB_USERNAME } }),
-  });
+    if (!result.data || !result.data.user) {
+      console.error("✖️No se recibieron datos del usuario. Revise TOKEN y USERNAME.");
+      return null;
+    }
 
-  const result = await response.json();
-
-  // Manejo de errores básico
-  if (result.errors) {
-    console.error("✖️Error de github", result.errors);
-    throw new Error("Error al obtener datos de GitHub. Revisa tu Token.");
+    const calendar: CalendarData =
+      result.data.user.contributionsCollection.contributionCalendar;
+    return calendar;
+  } catch (error) {
+    console.error("Error fetching calendar data:", error);
+    return null;
   }
-
-  if (!result.data || !result.data.user) {
-    console.error(
-      "✖️No se recibieron datos del usuario. Revise TOKEN y USERNAME.",
-    );
-    console.log("Respuesta completa", result);
-    throw new Error("No se recibieron datos del usuario");
-  }
-
-  const calendar: CalendarData =
-    result.data.user.contributionsCollection.contributionCalendar;
-  return calendar;
 };
