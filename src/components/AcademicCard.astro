@@ -28,7 +28,7 @@ const formacion = [
         id="formacion-heading"
         class="text-2xl sm:text-3xl md:text-5xl font-black tracking-widest flex items-center justify-center gap-4 text-on-surface"
       >
-        Formación Académica
+        # Formación Académica
       </h2>
     </div>
 
@@ -43,7 +43,7 @@ const formacion = [
         {
           formacion.map((estudio, index) => (
             <div
-              class={`formacion-item relative mb-8 md:mb-12 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+              class={`formacion-item flex items-center relative mb-8 md:mb-12 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
               role="listitem"
             >
               <div class="hidden md:block md:w-5/12">
@@ -54,7 +54,9 @@ const formacion = [
                   >
                     {estudio.periodo}
                   </time>
-                  <h3 class="text-lg sm:text-xl font-bold mt-2 text-on-surface">{estudio.titulo}</h3>
+                  <h3 class="text-lg sm:text-xl font-bold mt-2 text-on-surface">
+                    {estudio.titulo}
+                  </h3>
                   <p class="mt-1 text-green-500 text-sm">{estudio.escuela}</p>
                   <p class="text-xs sm:text-sm mt-2 sm:mt-3 text-on-surface-variant">
                     {estudio.descripcion}
@@ -70,7 +72,9 @@ const formacion = [
                   >
                     {estudio.periodo}
                   </time>
-                  <h3 class="text-lg font-bold mt-2 text-on-surface">{estudio.titulo}</h3>
+                  <h3 class="text-lg font-bold mt-2 text-on-surface">
+                    {estudio.titulo}
+                  </h3>
                   <p class="mt-1 text-green-500 text-sm">{estudio.escuela}</p>
                   <p class="text-xs mt-2 text-on-surface-variant">
                     {estudio.descripcion}
@@ -81,8 +85,7 @@ const formacion = [
               <div
                 class="absolute left-4 sm:left-6 md:left-1/2 top-2 w-4 h-4 rounded-full bg-primary border-4 border-surface-container transform -translate-x-1/2 z-10 hidden sm:block"
                 aria-hidden="true"
-              >
-              </div>
+              />
             </div>
           ))
         }

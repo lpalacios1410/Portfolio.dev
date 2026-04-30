@@ -4,19 +4,19 @@ const socialLinks = [
     name: "GitHub",
     icon: "github",
     url: "https://github.com/lpalacios1410",
-    label: "Perfil de GitHub"
+    label: "Perfil de GitHub",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    url: "https://linkedin.com/in/tu-perfil",
-    label: "Perfil de LinkedIn"
+    url: "https://www.linkedin.com/in/luis-palacios-739b1b15a/",
+    label: "Perfil de LinkedIn",
   },
   {
     name: "Email",
     icon: "email",
-    url: "mailto:tu-email@ejemplo.com",
-    label: "Enviar correo electrónico"
+    url: "luisarmando20092009@gmail.com",
+    label: "Enviar correo electrónico",
   },
 ];
 ---
@@ -26,43 +26,56 @@ const socialLinks = [
   aria-label="Enlaces a redes sociales"
 >
   <div
-    class="bg-surface-container-low/80 backdrop-blur-md rounded-2xl p-3 flex flex-col gap-3 border border-outline-variant/30 shadow-lg"
+    class="bg-black/40 backdrop-blur-md rounded-2xl p-3 flex flex-col gap-3 border border-outline-variant/30 shadow-lg"
     role="list"
     aria-label="Lista de redes sociales"
   >
-    {socialLinks.map((link) => (
-      <a
-        href={link.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container hover:bg-primary/20 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary"
-        role="listitem"
-        aria-label={link.label}
-        title={link.name}
-      >
-        {link.icon === "github" && (
-          <svg class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01-.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.24-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.14-1.22-2.68-1.23-4.22-.01-3.51 3.37-4.51 4.37-1.72.27-1.5.92-1.5 1.63-.01.69.21 1.05.78 1.05.78.63 1.69 2.43 1.2 3.02.36.41.58.64.58.28.16.13.46.1.86-.2 3.01-1.56 3.01-3.03 0-1.45-1.18-2.62-2.63-2.62-.37 0-.72.04-1.08.11z"/>
-          </svg>
-        )}
-        {link.icon === "linkedin" && (
-          <svg class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M20.447 20.452h-3.557v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.369 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-        )}
-        {link.icon === "email" && (
-          <svg class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-8.97 5.74a2 2 0 0 1-2.06 0L2 7"/>
-          </svg>
-        )}
-      </a>
-    ))}
+    {
+      socialLinks.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 flex items-center justify-center rounded-xl bg-surface-container hover:bg-primary/20 transition-all duration-300 group focus:outline-none focus:ring-2 focus:ring-primary"
+          role="listitem"
+          aria-label={link.label}
+          title={link.name}
+        >
+          {link.icon === "github" && (
+            <img
+              src={"/src/icons/github.svg"}
+              alt="GitHub"
+              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+            />
+          )}
+          {link.icon === "linkedin" && (
+            <img
+              src={"/src/icons/linkedin.svg"}
+              alt="LinkedIn"
+              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+            />
+          )}
+          {link.icon === "email" && (
+            <svg
+              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.74a2 2 0 0 1-2.06 0L2 7" />
+            </svg>
+          )}
+        </a>
+      ))
+    }
   </div>
 
   <div class="mt-4 flex flex-col items-center gap-2" aria-hidden="true">
-    <div class="w-px h-16 bg-outline-variant/50"></div>
-    <span class="text-xs font-mono text-on-surface-variant/70 vertical-text">SÍGUEME</span>
+    <div class="w-px h-16 bg-green-500"></div>
+    <span class="text-xs font-mono text-green-500 vertical-text">SÍGUEME</span>
   </div>
 </aside>
 

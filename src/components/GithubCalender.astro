@@ -15,8 +15,15 @@ const currentYear = new Date().getFullYear();
     calendar ? (
       <>
         <div class="flex justify-between items-center mb-4 text-gray-300">
-          <h3 id="github-calendar-heading" class="text-sm font-semibold">Contribuciones en el último año</h3>
-          <span class="text-xs" aria-label={`Total de ${calendar.totalContributions} contribuciones`}>{calendar.totalContributions} total</span>
+          <h3 id="github-calendar-heading" class="text-sm font-semibold">
+            Contribuciones en el último año
+          </h3>
+          <span
+            class="text-xs"
+            aria-label={`Total de ${calendar.totalContributions} contribuciones`}
+          >
+            {calendar.totalContributions} total
+          </span>
         </div>
 
         <div
@@ -25,7 +32,11 @@ const currentYear = new Date().getFullYear();
           aria-label={`Cuadrícula de contribuciones de ${currentYear}. Cada celda representa un día. Los colores indican la cantidad de contribuciones: desde ninguna (gris oscuro) hasta muchas (verde claro).`}
         >
           {calendar.weeks.map((week) => (
-            <div class="flex flex-col gap-1 shrink-0" role="row" aria-label={`Semana del ${week.contributionDays[0]?.date || 'N/A'}`}>
+            <div
+              class="flex flex-col gap-1 shrink-0"
+              role="row"
+              aria-label={`Semana del ${week.contributionDays[0]?.date || "N/A"}`}
+            >
               {week.contributionDays.map((day) => (
                 <div
                   class="w-2.5 h-2.5 rounded-xxs transition-transform hover:scale-150 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -34,7 +45,7 @@ const currentYear = new Date().getFullYear();
                       day.color === "#ebedf0" ? "#161b22" : day.color,
                   }}
                   role="gridcell"
-                  aria-label={`${day.date}: ${day.contributionCount} contribucion${day.contributionCount !== 1 ? 'es' : ''}`}
+                  aria-label={`${day.date}: ${day.contributionCount} contribucion${day.contributionCount !== 1 ? "es" : ""}`}
                   tabindex="0"
                   title={`${day.date}: ${day.contributionCount} contribuciones`}
                 />
@@ -43,21 +54,42 @@ const currentYear = new Date().getFullYear();
           ))}
         </div>
 
-        <div class="flex items-center gap-2 mt-4 text-2xs text-gray-400 justify-end" role="list" aria-label="Leyenda de colores">
+        <div
+          class="flex items-center gap-2 mt-4 text-2xs text-gray-400 justify-end"
+          role="list"
+          aria-label="Leyenda de colores"
+        >
           <span>Menos</span>
           <div class="flex gap-1" role="listitem">
-            <div class="w-2.5 h-2.5 bg-[#161b22] rounded-xxs" aria-label="0 contribuciones" />
-            <div class="w-2.5 h-2.5 bg-[#0e4429] rounded-xxs" aria-label="1-2 contribuciones" />
-            <div class="w-2.5 h-2.5 bg-[#006d32] rounded-xxs" aria-label="3-5 contribuciones" />
-            <div class="w-2.5 h-2.5 bg-[#26a641] rounded-xxs" aria-label="6-9 contribuciones" />
-            <div class="w-2.5 h-2.5 bg-[#39d353] rounded-xxs" aria-label="10 o más contribuciones" />
+            <div
+              class="w-2.5 h-2.5 bg-[#161b22] rounded-xxs"
+              aria-label="0 contribuciones"
+            />
+            <div
+              class="w-2.5 h-2.5 bg-[#0e4429] rounded-xxs"
+              aria-label="1-2 contribuciones"
+            />
+            <div
+              class="w-2.5 h-2.5 bg-[#006d32] rounded-xxs"
+              aria-label="3-5 contribuciones"
+            />
+            <div
+              class="w-2.5 h-2.5 bg-[#26a641] rounded-xxs"
+              aria-label="6-9 contribuciones"
+            />
+            <div
+              class="w-2.5 h-2.5 bg-[#39d353] rounded-xxs"
+              aria-label="10 o más contribuciones"
+            />
           </div>
           <span>Más</span>
         </div>
 
         <p class="sr-only">
-          En el último año, Luis Palacios ha realizado {calendar.totalContributions} contribuciones en GitHub.
-          La cuadrícula anterior muestra la actividad diaria, donde los cuadros más oscuros indican más contribuciones.
+          En el último año, Luis Palacios ha realizado{" "}
+          {calendar.totalContributions} contribuciones en GitHub. La cuadrícula
+          anterior muestra la actividad diaria, donde los cuadros más oscuros
+          indican más contribuciones.
         </p>
       </>
     ) : (
