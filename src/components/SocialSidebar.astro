@@ -1,24 +1,18 @@
 ---
-const socialLinks = [
-  {
-    name: "GitHub",
-    icon: "github",
-    url: "https://github.com/lpalacios1410",
-    label: "Perfil de GitHub",
-  },
-  {
-    name: "LinkedIn",
-    icon: "linkedin",
-    url: "https://www.linkedin.com/in/luis-palacios-739b1b15a/",
-    label: "Perfil de LinkedIn",
-  },
-  {
-    name: "Email",
-    icon: "email",
-    url: "luisarmando20092009@gmail.com",
-    label: "Enviar correo electrónico",
-  },
-];
+import { Icon } from "astro-icon/components";
+
+export interface SocialLink {
+  name: string;
+  icon: string; // nombre del archivo svg sin extensión
+  url: string;
+  label: string;
+}
+
+export interface Props {
+  socialLinks: SocialLink[];
+}
+
+const { socialLinks } = Astro.props;
 ---
 
 <aside
@@ -41,33 +35,11 @@ const socialLinks = [
           aria-label={link.label}
           title={link.name}
         >
-          {link.icon === "github" && (
-            <img
-              src={"/src/icons/github.svg"}
-              alt="GitHub"
-              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
-            />
-          )}
-          {link.icon === "linkedin" && (
-            <img
-              src={"/src/icons/linkedin.svg"}
-              alt="LinkedIn"
-              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
-            />
-          )}
-          {link.icon === "email" && (
-            <svg
-              class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-              <path d="m22 7-8.97 5.74a2 2 0 0 1-2.06 0L2 7" />
-            </svg>
-          )}
+          <Icon
+            name={`src/icons/${link.icon}.svg`}
+            class="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors"
+            aria-hidden="true"
+          />
         </a>
       ))
     }
