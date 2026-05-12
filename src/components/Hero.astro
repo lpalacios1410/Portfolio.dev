@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <section
@@ -10,7 +11,8 @@
     class="left-side md:col-span-7 space-y-8 flex flex-col justify-center items-center md:items-start text-center md:text-left"
   >
     <div class="space-y-4">
-      <span class="badge-text text-sm tracking-[0.4em] font-medium uppercase text-on-surface-variant"
+      <span
+        class="badge-text text-sm tracking-[0.4em] font-medium uppercase text-on-surface-variant"
         >Ingeniero de Software
       </span>
       <h1
@@ -28,10 +30,10 @@
     </p>
     <div class="flex gap-4">
       <a
-        href="/CV-LuisPalacios2026.pdf"
+        href="/CV-2026-LuisPalacios.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        download="CV-LuisPalacios2026.pdf"
+        download="CV-2026-LuisPalacios.pdf"
         class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-all duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
         aria-label="Descargar currículum vitae en formato PDF"
       >
@@ -63,11 +65,32 @@
   const prefersReduced = prefersReducedMotion();
 
   // Set initial states with gsap.set for better performance
-  gsap.set(".badge-text", { opacity: 0, y: -20, willChange: "transform, opacity" });
-  gsap.set(".title-line", { opacity: 0, x: -50, willChange: "transform, opacity" });
-  gsap.set(".hero-description", { opacity: 0, y: 20, willChange: "transform, opacity" });
-  gsap.set(".hero-cta", { opacity: 0, scale: 0.9, willChange: "transform, opacity" });
-  gsap.set(".rigth-side", { opacity: 0, x: 100, rotation: 5, willChange: "transform, opacity" });
+  gsap.set(".badge-text", {
+    opacity: 0,
+    y: -20,
+    willChange: "transform, opacity",
+  });
+  gsap.set(".title-line", {
+    opacity: 0,
+    x: -50,
+    willChange: "transform, opacity",
+  });
+  gsap.set(".hero-description", {
+    opacity: 0,
+    y: 20,
+    willChange: "transform, opacity",
+  });
+  gsap.set(".hero-cta", {
+    opacity: 0,
+    scale: 0.9,
+    willChange: "transform, opacity",
+  });
+  gsap.set(".rigth-side", {
+    opacity: 0,
+    x: 100,
+    rotation: 5,
+    willChange: "transform, opacity",
+  });
 
   const tl = gsap.timeline({
     defaults: {
