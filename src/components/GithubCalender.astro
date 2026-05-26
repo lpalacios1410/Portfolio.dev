@@ -15,14 +15,14 @@ const currentYear = new Date().getFullYear();
     calendar ? (
       <>
         <div class="flex justify-between items-center mb-4 text-gray-300">
-          <h3 id="github-calendar-heading" class="text-sm font-semibold">
+          <h3 id="github-calendar-heading" class="text-sm font-semibold" data-i18n="github.heading">
             Contribuciones en el último año
           </h3>
           <span
             class="text-xs"
             aria-label={`Total de ${calendar.totalContributions} contribuciones`}
           >
-            {calendar.totalContributions} total
+            {calendar.totalContributions} <span data-i18n="github.total">total</span>
           </span>
         </div>
 
@@ -59,7 +59,7 @@ const currentYear = new Date().getFullYear();
           role="list"
           aria-label="Leyenda de colores"
         >
-          <span>Menos</span>
+          <span data-i18n="github.less">Menos</span>
           <div class="flex gap-1" role="listitem">
             <div
               class="w-2.5 h-2.5 bg-[#161b22] rounded-xxs"
@@ -82,7 +82,7 @@ const currentYear = new Date().getFullYear();
               aria-label="10 o más contribuciones"
             />
           </div>
-          <span>Más</span>
+          <span data-i18n="github.more">Más</span>
         </div>
 
         <p class="sr-only">
@@ -93,7 +93,7 @@ const currentYear = new Date().getFullYear();
         </p>
       </>
     ) : (
-      <div class="text-red-400 text-center" role="alert">
+      <div class="text-red-400 text-center" role="alert" data-i18n="github.error">
         No se pudieron cargar los datos del calendario de GitHub.
       </div>
     )

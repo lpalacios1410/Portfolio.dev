@@ -1,11 +1,10 @@
 ---
-
 ---
 
 <section
   class="box max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-12 place-items-center min-h-screen pt-20"
   id="home"
-  aria-label="Sección principal de presentación"
+  data-i18n-aria="hero.section_aria"
 >
   <div
     class="left-side md:col-span-7 space-y-8 flex flex-col justify-center items-center md:items-start text-center md:text-left"
@@ -13,16 +12,16 @@
     <div class="space-y-4">
       <span
         class="badge-text text-sm tracking-[0.4em] font-medium uppercase text-on-surface-variant"
-        >Ingeniero de Software
-      </span>
+        data-i18n="hero.badge"
+      >Ingeniero de Software</span>
       <h1
         class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black max-w-xs lg:max-w-xl tracking-tighter leading-tight text-on-surface"
       >
-        <span class="title-line block">Desarrollador</span>
-        <span class="title-line block text-green-500">Full-Stack Jr</span>
+        <span class="title-line block" data-i18n="hero.title1">Desarrollador</span>
+        <span class="title-line block text-green-500" data-i18n="hero.title2">Full-Stack Jr</span>
       </h1>
     </div>
-    <p class="hero-description text-xl max-w-2xl text-on-surface-variant">
+    <p class="hero-description text-xl max-w-2xl text-on-surface-variant" data-i18n="hero.description">
       Desarrollador full-stack especializado en la creación de soluciones
       digitales a medida. Aunque estoy en las primeras etapas de mi carrera como
       desarrollador, creo tener una base sólida para crear productos
@@ -35,9 +34,9 @@
         rel="noopener noreferrer"
         download="CV-2026-LuisPalacios.pdf"
         class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-all duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        aria-label="Descargar currículum vitae en formato PDF"
+        data-i18n-aria="hero.cta_aria"
       >
-        Descargar CV
+        <span data-i18n="hero.cta">Descargar CV</span>
       </a>
     </div>
   </div>

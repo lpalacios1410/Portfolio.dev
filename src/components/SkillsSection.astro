@@ -14,6 +14,7 @@ import SkillCard from "./SkillCard.astro";
         id="skills-heading"
         class="text-3xl md:text-5xl font-black tracking-widest"
         style="color: var(--color-on-surface)"
+        data-i18n="skills.heading"
       >
         {"{}"} Habilidades
       </h2>
@@ -24,11 +25,11 @@ import SkillCard from "./SkillCard.astro";
       <div
         class="col-span-4 md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         role="list"
-        aria-label="Lista de habilidades técnicas"
+        data-i18n-aria="skills.aria_list"
       >
         <!-- Frontend Stack -->
         <SkillCard
-          title="FRONTEND"
+          titleKey="FRONTEND"
           borderColor="border-blue-400"
           icons={[
             { name: "html", label: "HTML 5" },
@@ -42,7 +43,7 @@ import SkillCard from "./SkillCard.astro";
         />
         <!-- Backend Stack -->
         <SkillCard
-          title="BACKEND"
+          titleKey="BACKEND"
           borderColor="border-green-500"
           icons={[
             { name: "nodejs", label: "Node JS" },
@@ -53,7 +54,7 @@ import SkillCard from "./SkillCard.astro";
         />
         <!-- Tools Stack -->
         <SkillCard
-          title="HERRAMIENTAS"
+          titleKey="TOOLS"
           borderColor="border-red-500"
           icons={[
             { name: "github", label: "Github" },
