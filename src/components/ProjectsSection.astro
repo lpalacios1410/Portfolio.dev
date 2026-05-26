@@ -26,6 +26,13 @@ const projects = [
     imageAlt: "Captura de pantalla de la tienda online OnlyGirlsCCS",
     urlProject: "https://github.com/lpalacios1410/OnlyGirlsCss-Ecommerce",
     urlDemo: "https://onlygirlsccs-ecommerce-frontend.vercel.app/",
+    keys: {
+      title: "projects.0.title",
+      subtitle: "projects.0.subtitle",
+      category: "projects.0.category",
+      description: "projects.0.description",
+      status: "projects.0.status",
+    },
   },
 ];
 
@@ -38,6 +45,7 @@ const projects = [
     <h2
       id="projects-heading"
       class="projects-title text-5xl font-black tracking-tighter text-on-surface"
+      data-i18n="projects.heading"
     >
       Proyectos Destacados
     </h2>
@@ -45,12 +53,12 @@ const projects = [
     <a
       class="font-label text-sm text-primary uppercase tracking-widest hover:underline decoration-2 underline-offset-8 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-2 py-1"
       href="#"
-      aria-label="Ver todos los proyectos en GitHub"
+      data-i18n-aria="projects.view_all_aria"
     >
-      Ver todos los proyectos
+      <span data-i18n="projects.view_all">Ver todos los proyectos</span>
     </a>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Lista de proyectos">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" data-i18n-aria="projects.aria_list">
     {
       projects.map((project, index) => (
         <CardProject {...project} index={index} />

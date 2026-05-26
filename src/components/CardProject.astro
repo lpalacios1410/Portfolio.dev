@@ -12,10 +12,16 @@ interface Props {
   urlProject: string;
   urlDemo: string;
   index?: number;
+  keys?: {
+    title: string;
+    subtitle: string;
+    category: string;
+    description: string;
+    status: string;
+  };
 }
 
 const {
-  title,
   description,
   languages,
   subtitle,
@@ -25,6 +31,7 @@ const {
   category,
   urlProject,
   urlDemo,
+  keys,
 } = Astro.props;
 ---
 
@@ -42,9 +49,9 @@ const {
         target="_blank"
         rel="noopener noreferrer"
         class="bg-green-500/20 backdrop-blur-sm border border-green-500/50 text-green-400 px-4 py-2 rounded-full font-bold text-sm hover:bg-green-500/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400"
-        aria-label={`Ver demostración del proyecto ${title}`}
+        data-i18n-aria="projects.see_demo_aria"
       >
-        Ver Demo
+        <span data-i18n="projects.see_demo">Ver Demo</span>
       </a>
     </div>
     <picture>
@@ -59,32 +66,40 @@ const {
     <div class="flex flex-col justify-between items-start gap-2">
       <h3
         class="text-2xl font-bold text-on-surface group-hover:text-green-400 transition-colors duration-300"
+        data-i18n-lang={keys?.title}
       >
-        {title}
+        {Astro.props.title}
       </h3>
       <span
         class="text-xs text-green-500 font-mono bg-green-500/10 px-2 py-1 rounded-full"
-        >{status}</span
+        data-i18n-lang={keys?.status}
       >
+        {status}
+      </span>
     </div>
-    <div class="flex flex-wrap gap-2" role="list" aria-label="Categorías del proyecto">
+    <div class="flex flex-wrap gap-2" role="list" data-i18n-aria="projects.aria_categories">
       <span
         class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300"
         role="listitem"
-        >{subtitle}</span
+        data-i18n-lang={keys?.subtitle}
       >
+        {subtitle}
+      </span>
       <span
         class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-gray-300"
         role="listitem"
-        >{category}</span
+        data-i18n-lang={keys?.category}
       >
+        {category}
+      </span>
     </div>
     <p
       class="text-gray-400 text-sm leading-relaxed line-clamp-3 group-hover:line-clamp-none focus:line-clamp-none transition-all duration-300"
+      data-i18n-lang={keys?.description}
     >
       {description}
     </p>
-    <div class="flex flex-wrap gap-3 pt-2" role="list" aria-label="Tecnologías utilizadas">
+    <div class="flex flex-wrap gap-3 pt-2" role="list" data-i18n-aria="projects.aria_techs">
       {
         languages.map(({ icon: Icon, label }) => (
           <div class="flex items-center gap-1.5 text-xs text-gray-400 bg-white/5 px-2 py-1 rounded-lg group-hover:bg-white/10 transition-colors duration-300" role="listitem">
@@ -107,9 +122,9 @@ const {
         href={urlProject}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Ver código fuente del proyecto ${title} en GitHub`}
+        data-i18n-aria="projects.code_aria"
       >
-        Código
+        <span data-i18n="projects.code">Código</span>
       </a>
     </div>
   </div>

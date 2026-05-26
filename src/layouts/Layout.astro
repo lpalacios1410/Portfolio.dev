@@ -14,11 +14,19 @@ const imageURL = new URL("/developer.jpg", Astro.url);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
+    <script is:inline>
+      (function() {
+        var lang = localStorage.getItem("portfolio-lang");
+        if (lang === "en" || lang === "es") {
+          document.documentElement.lang = lang;
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={description} data-i18n-meta-description="layout.description" />
     <meta
       name="keywords"
       content="portfolio, proyectos, desarrollo web, full-stack, JavaScript, React, Astro, Tailwind CSS, Node.js"
@@ -40,7 +48,7 @@ const imageURL = new URL("/developer.jpg", Astro.url);
   </head>
   <body>
     <SocialSidebar />
-    <a href="#home" class="skip-link">Saltar al contenido principal</a>
+    <a href="#home" class="skip-link" data-i18n="layout.skip">Saltar al contenido principal</a>
     <slot />
   </body>
   <script
