@@ -5,7 +5,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Layout
     "layout.skip": "Saltar al contenido principal",
     "layout.description":
-      "Portfolio de Luis Palacios - Desarrollador Full-Stack Jr especializado en soluciones digitales",
+      "Portfolio de Luis Palacios - Desarrollador Full-Stack especializado en soluciones digitales",
     "layout.keywords":
       "portfolio, proyectos, desarrollo web, full-stack, JavaScript, React, Astro, Tailwind CSS, Node.js",
     "layout.og_locale": "es_ES",
@@ -36,7 +36,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     "hero.section_aria": "Sección principal de presentación",
     "hero.badge": "Ingeniero de Software",
     "hero.title1": "Desarrollador",
-    "hero.title2": "Full-Stack Jr",
+    "hero.title2": "Full-Stack",
     "hero.description":
       "Desarrollador full-stack especializado en la creación de soluciones digitales a medida. Aunque estoy en las primeras etapas de mi carrera como desarrollador, creo tener una base sólida para crear productos funcionales, escalables y visualmente coherentes.",
     "hero.cta": "Descargar CV",
@@ -92,7 +92,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Layout
     "layout.skip": "Skip to main content",
     "layout.description":
-      "Portfolio of Luis Palacios - Full-Stack Jr Developer specialized in digital solutions",
+      "Portfolio of Luis Palacios - Full-Stack Developer specialized in digital solutions",
     "layout.keywords":
       "portfolio, projects, web development, full-stack, JavaScript, React, Astro, Tailwind CSS, Node.js",
     "layout.og_locale": "en_US",
@@ -123,7 +123,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     "hero.section_aria": "Main presentation section",
     "hero.badge": "Software Engineer",
     "hero.title1": "Full-Stack",
-    "hero.title2": "Developer Jr",
+    "hero.title2": "Developer",
     "hero.description":
       "Full-stack developer specialized in creating custom digital solutions. Although I'm in the early stages of my development career, I believe I have a solid foundation to create functional, scalable, and visually coherent products.",
     "hero.cta": "Download CV",
