@@ -1,6 +1,10 @@
 # Luis.Dev — Portfolio 🤖
 
-My personal portfolio as a Full-Stack Developer. Browse my projects, explore my tech stack, and get to know a bit about who I am.
+Portfolio built with Astro + Tailwind CSS. Features bilingual support, GSAP animations, and a live GitHub contribution calendar.
+
+> My personal portfolio as a Full-Stack Developer. Browse my projects, explore my tech stack, and get to know a bit about who I am.
+
+🔗 [Live Demo](https://portfolio-dev-nine-phi.vercel.app/) · `Astro` `Tailwind CSS` `GSAP` `TypeScript`
 
 ## Description 📄
 
