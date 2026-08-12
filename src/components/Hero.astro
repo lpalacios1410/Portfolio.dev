@@ -41,7 +41,7 @@
         target="_blank"
         rel="noopener noreferrer"
         download="CV-2026-LuisPalacios.pdf"
-        class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-all duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-colors duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
         data-i18n-aria="hero.cta_aria" data-animate
       >
         <span data-i18n="hero.cta">Descargar CV</span>
@@ -95,7 +95,7 @@
 
     // Limpieza del estado initial una vez animado
     tl.eventCallback("onComplete", () => {
-      gsap.set("[data-animate]", { willChange: "auto" });
+      gsap.set(root.querySelectorAll("[data-animate]"), { willChange: "auto" });
     });
 
     if (!prefersReduced) {
