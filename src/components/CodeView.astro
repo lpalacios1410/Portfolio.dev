@@ -214,7 +214,9 @@
       });
     };
 
-    // Única inicialización: astro:page-load se dispara en carga inicial y navegaciones
+    // Carga inicial: sin View Transitions, `astro:page-load` no se dispara al cargar.
+    // El guard interno `if (masterTl) masterTl.kill()` evita timelines duplicadas.
+    initTypewriterLoop();
     document.addEventListener("astro:page-load", initTypewriterLoop);
   </script>
 </section>
