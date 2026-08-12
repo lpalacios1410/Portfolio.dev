@@ -1,17 +1,29 @@
-# Luis.Dev — Portfolio
+# Luis.Dev — Portfolio 🤖
 
-My personal portfolio as a Full-Stack Developer. Browse my projects, explore my tech stack, and get to know a bit about who I am.
+Portfolio built with Astro + Tailwind CSS. Features bilingual support, GSAP animations, and a live GitHub contribution calendar.
 
-## Description
+> My personal portfolio as a Full-Stack Developer. Browse my projects, explore my tech stack, and get to know a bit about who I am.
+
+🔗 [Live Demo](https://portfolio-dev-nine-phi.vercel.app/) · `Astro` `Tailwind CSS` `GSAP` `TypeScript`
+
+## Description 📄
 
 This portfolio was built with two goals in mind:
 
 1. **Showcase my work** — Highlight the projects I'm most proud of and demonstrate the skills behind them.
-2. **Keep evolving** — This is a living project that I'll continue improving as I learn new tools and techniques. Feedback and suggestions are always welcome.
 
+2. **Keep evolving** — This is a living project that I'll continue improving as I learn new tools and techniques. Feedback and suggestions are always welcome.
 Built as a bilingual single-page application with Astro, featuring smooth GSAP animations, a live GitHub contribution calendar, and a fully responsive dark-themed design.
 
-## Tech Stack
+## Screenshots📸
+
+![image alt](https://github.com/lpalacios1410/Portfolio.dev/blob/1715e2c72a341f02ee25a65bef4a86c5cf01f27e/public/Portfolio1.png)
+
+![image alt](https://github.com/lpalacios1410/Portfolio.dev/blob/1715e2c72a341f02ee25a65bef4a86c5cf01f27e/public/Portfolio2.png)
+
+![image alt](https://github.com/lpalacios1410/Portfolio.dev/blob/1715e2c72a341f02ee25a65bef4a86c5cf01f27e/public/Portfolio3.png)
+
+## Tech Stack 💻
 
 | Category | Technology |
 |---|---|
@@ -22,14 +34,13 @@ Built as a bilingual single-page application with Astro, featuring smooth GSAP a
 | **Language** | TypeScript |
 | **Package Manager** | pnpm |
 
-## Features
+## Features ⛓️
 
 - **Bilingual support** — Spanish & English with runtime language switching
 - **Interactive UI** — GSAP-powered scroll animations and typewriter effect
 - **GitHub integration** — Live contribution calendar via GraphQL API
 - **Responsive design** — Optimized for all screen sizes
 - **SEO ready** — Open Graph tags, meta descriptions, canonical URL
-- **Dark theme** — Modern dark UI with grayscale-to-color profile hover effect
 
 ## Run Locally
 
