@@ -4,29 +4,19 @@
 >
   <div
     class="flex gap-2 mb-2 pt-1 overflow-x-auto"
-    role="tablist"
-    aria-label="Seleccionar archivo de código"
+    aria-label="Archivos mostrados"
   >
-    <button
-      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-500/20 text-blue-500 whitespace-nowrap"
-      role="tab"
-      aria-selected="true"
-      aria-controls="code-container">frontend.js</button
-    >
+    <span
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs border-b-2 border-blue-400 bg-gray-500/20 text-blue-500 whitespace-nowrap"
+    >frontend.js</span>
 
-    <button
-      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-green-400 hover:opacity-80 bg-gray-500/20 text-green-500 whitespace-nowrap"
-      role="tab"
-      aria-selected="false"
-      aria-controls="code-container">backend.py</button
-    >
+    <span
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs border-b-2 border-transparent bg-gray-500/20 text-green-500 whitespace-nowrap"
+    >backend.py</span>
 
-    <button
-      class="hidden sm:block px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-red-400 bg-gray-500/20 hover:opacity-80 text-red-500 whitespace-nowrap"
-      role="tab"
-      aria-selected="false"
-      aria-controls="code-container">database.sql</button
-    >
+    <span
+      class="hidden sm:block px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs border-b-2 border-transparent bg-gray-500/20 text-red-500 whitespace-nowrap"
+    >database.sql</span>
   </div>
   <div
     class="rounded-2xl border shadow-2xl relative overflow-hidden bg-black/30 border-outline-variant"
