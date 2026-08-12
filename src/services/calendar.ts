@@ -25,55 +25,79 @@ export interface CalendarError {
   code?: string;
 }
 
-console.log("token usado", GITHUB_TOKEN ? "SI" : "NO");
+interface GraphQLResponse {
+  data?: {
+    user?: {
+      contributionsCollection: {
+        contributionCalendar: CalendarData;
+      };
+    };
+  };
+  errors?: ReadonlyArray<{ message: string }>;
+}
 
-export const getCalendarData = async (): Promise<CalendarResult> => {
-  try {
-    const query = `
-      query($login: String!) {
-        user(login: $login) {
-          contributionsCollection {
-            contributionCalendar {
-              totalContributions
-              weeks {
-                contributionDays {
-                  contributionCount
-                  date
-                  color
-                }
-              }
+const GRAPHQL_QUERY = `
+  query($login: String!) {
+    user(login: $login) {
+      contributionsCollection {
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              contributionCount
+              date
+              color
             }
           }
         }
       }
-    `;
+    }
+  }
+`;
 
+export const getCalendarData = async (): Promise<CalendarResult> => {
+  if (!GITHUB_TOKEN) {
+    console.warn("[calendar] GITHUB_TOKEN ausente: no se puede consultar la API.");
+    return null;
+  }
+
+  try {
     const response = await fetch("https://api.github.com/graphql", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ query, variables: { login: GITHUB_USERNAME } }),
+      body: JSON.stringify({
+        query: GRAPHQL_QUERY,
+        variables: { login: GITHUB_USERNAME },
+      }),
     });
 
-    const result = await response.json();
+    if (!response.ok) {
+      console.error(
+        `[calendar] HTTP ${response.status} ${response.statusText} al consultar GitHub.`
+      );
+      return null;
+    }
+
+    const result = (await response.json()) as GraphQLResponse;
 
     if (result.errors) {
-      console.error("✖️Error de github", result.errors);
+      console.error("[calendar] Errores de GraphQL:", result.errors);
       return null;
     }
 
     if (!result.data || !result.data.user) {
-      console.error("✖️No se recibieron datos del usuario. Revise TOKEN y USERNAME.");
+      console.error(
+        "[calendar] No se recibieron datos del usuario. Revise TOKEN y USERNAME."
+      );
       return null;
     }
 
-    const calendar: CalendarData =
-      result.data.user.contributionsCollection.contributionCalendar;
-    return calendar;
+    return result.data.user.contributionsCollection.contributionCalendar;
   } catch (error) {
-    console.error("Error fetching calendar data:", error);
+    console.error("[calendar] Error fetching calendar data:", error);
     return null;
   }
 };

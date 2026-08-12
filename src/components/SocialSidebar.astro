@@ -225,65 +225,77 @@ const socialLinks = [
   const STORAGE_KEY = "portfolio-sidebar-collapsed";
 
   // Lang toggle
-  const langBtn = document.getElementById("lang-toggle")!;
-  const langText = document.getElementById("lang-toggle-text")!;
+  const langBtnEl = document.getElementById("lang-toggle");
+  const langTextEl = document.getElementById("lang-toggle-text");
 
-  function updateToggle(lang: Lang) {
-    langBtn.setAttribute("data-lang", lang);
-    langText.textContent = lang.toUpperCase();
-    langBtn.setAttribute(
-      "aria-label",
-      lang === "es" ? "Switch to English" : "Cambiar idioma a español",
-    );
+  if (langBtnEl && langTextEl) {
+    const langBtn: HTMLElement = langBtnEl;
+    const langText: HTMLElement = langTextEl;
+
+    function updateToggle(lang: Lang) {
+      langBtn.setAttribute("data-lang", lang);
+      langText.textContent = lang.toUpperCase();
+      langBtn.setAttribute(
+        "aria-label",
+        lang === "es" ? "Switch to English" : "Cambiar idioma a español",
+      );
+    }
+
+    langBtn.addEventListener("click", () => {
+      const current = getCurrentLang();
+      const next: Lang = current === "es" ? "en" : "es";
+      setLanguage(next);
+      updateToggle(next);
+    });
+
+    updateToggle(getCurrentLang());
   }
-
-  langBtn.addEventListener("click", () => {
-    const current = getCurrentLang();
-    const next: Lang = current === "es" ? "en" : "es";
-    setLanguage(next);
-    updateToggle(next);
-  });
-
-  updateToggle(getCurrentLang());
 
   // Sidebar toggle
-  const wrapper = document.getElementById("sidebar-wrapper")!;
-  const showBtn = document.getElementById("sidebar-show-btn")!;
-  const toggleBtn = document.getElementById("sidebar-toggle")!;
-  const chevron = document.getElementById("chevron-path")!;
+  const wrapperEl = document.getElementById("sidebar-wrapper");
+  const showBtnEl = document.getElementById("sidebar-show-btn");
+  const toggleBtnEl = document.getElementById("sidebar-toggle");
+  const chevronEl = document.getElementById("chevron-path");
 
-  function isCollapsed(): boolean {
-    return localStorage.getItem(STORAGE_KEY) === "true";
-  }
+  if (wrapperEl && showBtnEl && toggleBtnEl && chevronEl) {
+    const wrapper: HTMLElement = wrapperEl;
+    const showBtn: HTMLElement = showBtnEl;
+    const toggleBtn: HTMLElement = toggleBtnEl;
+    const chevron: HTMLElement = chevronEl;
 
-  function applyState(collapsed: boolean) {
-    if (collapsed) {
-      wrapper.style.transform = "translateY(-50%) translateX(-120%)";
-      wrapper.style.opacity = "0";
-      wrapper.style.pointerEvents = "none";
-      showBtn.style.display = "flex";
-      chevron.setAttribute("d", "M9 6l6 6-6 6");
-    } else {
-      wrapper.style.transform = "translateY(-50%)";
-      wrapper.style.opacity = "1";
-      wrapper.style.pointerEvents = "";
-      showBtn.style.display = "none";
-      chevron.setAttribute("d", "M15 6l-6 6 6 6");
+    function isCollapsed(): boolean {
+      return localStorage.getItem(STORAGE_KEY) === "true";
     }
+
+    function applyState(collapsed: boolean) {
+      if (collapsed) {
+        wrapper.style.transform = "translateY(-50%) translateX(-120%)";
+        wrapper.style.opacity = "0";
+        wrapper.style.pointerEvents = "none";
+        showBtn.style.display = "flex";
+        chevron.setAttribute("d", "M9 6l6 6-6 6");
+      } else {
+        wrapper.style.transform = "translateY(-50%)";
+        wrapper.style.opacity = "1";
+        wrapper.style.pointerEvents = "";
+        showBtn.style.display = "none";
+        chevron.setAttribute("d", "M15 6l-6 6 6 6");
+      }
+    }
+
+    function toggleSidebar() {
+      const next = !isCollapsed();
+      localStorage.setItem(STORAGE_KEY, String(next));
+      applyState(next);
+      toggleBtn.setAttribute(
+        "aria-label",
+        next ? "Mostrar sidebar" : "Ocultar sidebar",
+      );
+    }
+
+    toggleBtn.addEventListener("click", toggleSidebar);
+    showBtn.addEventListener("click", toggleSidebar);
+
+    applyState(isCollapsed());
   }
-
-  function toggleSidebar() {
-    const next = !isCollapsed();
-    localStorage.setItem(STORAGE_KEY, String(next));
-    applyState(next);
-    toggleBtn.setAttribute(
-      "aria-label",
-      next ? "Mostrar sidebar" : "Ocultar sidebar",
-    );
-  }
-
-  toggleBtn.addEventListener("click", toggleSidebar);
-  showBtn.addEventListener("click", toggleSidebar);
-
-  applyState(isCollapsed());
 </script>
