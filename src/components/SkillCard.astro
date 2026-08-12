@@ -38,7 +38,11 @@ const resolvedTitle = titleKey ?? "";
       </h4>
     </div>
   </div>
-  <div class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4" role="list" aria-label={`Lista de tecnologías ${resolvedTitle}`}>
+  <div
+    class="grid grid-cols-2 xs:grid-cols-3 gap-4 p-4"
+    role="list"
+    aria-label={`Lista de tecnologías ${resolvedTitle}`}
+  >
     {
       icons.map((icon) => (
         <div
@@ -47,7 +51,11 @@ const resolvedTitle = titleKey ?? "";
           tabindex="0"
           aria-label={icon.label}
         >
-          <Icon name={icon.name} class="w-12 h-12 md:w-15 md:h-15" aria-hidden="true" />
+          <Icon
+            name={icon.name}
+            class="w-12 h-12 md:w-15 md:h-15"
+            aria-hidden="true"
+          />
           <span class="text-sm mt-1 text-on-surface-variant">{icon.label}</span>
         </div>
       ))

@@ -1,5 +1,8 @@
 import { translations, type Lang } from "./translations";
 
+type Dictionary = typeof translations["es"];
+export type TranslationKey = keyof Dictionary;
+
 const STORAGE_KEY = "portfolio-lang";
 const EVENT_NAME = "languagechange";
 
@@ -18,9 +21,30 @@ export function getCurrentLang(): Lang {
   return "es";
 }
 
-export function t(key: string): string {
+export function t<K extends TranslationKey>(key: K): Dictionary[K] {
   const lang = getCurrentLang();
-  return translations[lang][key] ?? key;
+  return translations[lang][key] ?? (key as Dictionary[K]);
+}
+
+type AttrApplier = (el: HTMLElement, value: string) => void;
+
+const I18N_ATTRS: ReadonlyArray<{ selector: string; attr: string; apply: AttrApplier }> = [
+  { selector: "[data-i18n]", attr: "data-i18n", apply: (el, v) => { el.textContent = v; } },
+  { selector: "[data-i18n-aria]", attr: "data-i18n-aria", apply: (el, v) => { el.setAttribute("aria-label", v); } },
+  { selector: "[data-i18n-placeholder]", attr: "data-i18n-placeholder", apply: (el, v) => { el.setAttribute("placeholder", v); } },
+  { selector: "[data-i18n-title]", attr: "data-i18n-title", apply: (el, v) => { el.setAttribute("title", v); } },
+  { selector: "[data-i18n-alt]", attr: "data-i18n-alt", apply: (el, v) => { el.setAttribute("alt", v); } },
+  { selector: "[data-i18n-lang]", attr: "data-i18n-lang", apply: (el, v) => { el.textContent = v; } },
+];
+
+function applyTranslations(lang: Lang): void {
+  const dict = translations[lang];
+  for (const { selector, attr, apply } of I18N_ATTRS) {
+    document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+      const key = el.getAttribute(attr) as TranslationKey | null;
+      if (key && dict[key] !== undefined) apply(el, dict[key]!);
+    });
+  }
 }
 
 export function setLanguage(lang: Lang): void {
@@ -29,54 +53,12 @@ export function setLanguage(lang: Lang): void {
 
   const metaLocale = document.querySelector('meta[property="og:locale"]');
   if (metaLocale) {
-    metaLocale.setAttribute("content", translations[lang]["layout.og_locale"]);
+    metaLocale.setAttribute("content", translations[lang]["layout.og_locale"]!);
   }
 
   applyTranslations(lang);
-  document.querySelectorAll<HTMLElement>('[data-i18n-lang]').forEach(el => {
-    el.textContent = translations[lang][el.getAttribute("data-i18n-lang")!] ?? el.textContent;
-  });
 
   window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: { lang } }));
-}
-
-function applyTranslations(lang: Lang): void {
-  const dict = translations[lang];
-
-  document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    if (key && dict[key] !== undefined) {
-      el.textContent = dict[key];
-    }
-  });
-
-  document.querySelectorAll<HTMLElement>("[data-i18n-aria]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-aria");
-    if (key && dict[key] !== undefined) {
-      el.setAttribute("aria-label", dict[key]);
-    }
-  });
-
-  document.querySelectorAll<HTMLElement>("[data-i18n-placeholder]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-placeholder");
-    if (key && dict[key] !== undefined) {
-      el.setAttribute("placeholder", dict[key]);
-    }
-  });
-
-  document.querySelectorAll<HTMLElement>("[data-i18n-title]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-title");
-    if (key && dict[key] !== undefined) {
-      el.setAttribute("title", dict[key]);
-    }
-  });
-
-  document.querySelectorAll<HTMLElement>("[data-i18n-alt]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-alt");
-    if (key && dict[key] !== undefined) {
-      el.setAttribute("alt", dict[key]);
-    }
-  });
 }
 
 export function initI18n(): void {

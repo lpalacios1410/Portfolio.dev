@@ -39,14 +39,13 @@ const currentYear = new Date().getFullYear();
             >
               {week.contributionDays.map((day) => (
                 <div
-                  class="w-2.5 h-2.5 rounded-xxs transition-transform hover:scale-150 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  class="w-2.5 h-2.5 rounded-xxs transition-transform hover:scale-150"
                   style={{
                     backgroundColor:
                       day.color === "#ebedf0" ? "#161b22" : day.color,
                   }}
                   role="gridcell"
                   aria-label={`${day.date}: ${day.contributionCount} contribucion${day.contributionCount !== 1 ? "es" : ""}`}
-                  tabindex="0"
                   title={`${day.date}: ${day.contributionCount} contribuciones`}
                 />
               ))}

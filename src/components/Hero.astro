@@ -13,22 +13,22 @@
     <div class="space-y-4">
       <span
         class="badge-text text-sm tracking-[0.4em] font-medium uppercase text-on-surface-variant"
-        data-i18n="hero.badge">Ingeniero de Software</span
+        data-i18n="hero.badge" data-animate>Ingeniero de Software</span
       >
       <h1
         class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black max-w-xs lg:max-w-xl tracking-tighter leading-tight text-on-surface"
       >
-        <span class="title-line block" data-i18n="hero.title1"
+        <span class="title-line block" data-i18n="hero.title1" data-animate
           >Desarrollador</span
         >
-        <span class="title-line block text-green-500" data-i18n="hero.title2"
+        <span class="title-line block text-green-500" data-i18n="hero.title2" data-animate
           >Full-Stack</span
         >
       </h1>
     </div>
     <p
       class="hero-description text-xl max-w-2xl text-on-surface-variant"
-      data-i18n="hero.description"
+      data-i18n="hero.description" data-animate
     >
       Desarrollador full-stack especializado en la creación de soluciones
       digitales a medida. Aunque estoy en las primeras etapas de mi carrera como
@@ -41,14 +41,14 @@
         target="_blank"
         rel="noopener noreferrer"
         download="CV-2026-LuisPalacios.pdf"
-        class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-all duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        data-i18n-aria="hero.cta_aria"
+        class="hero-cta font-label font-bold text-sm uppercase tracking-widest cursor-pointer px-8 py-4 rounded-2xl transition-colors duration-700 bg-primary text-on-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        data-i18n-aria="hero.cta_aria" data-animate
       >
         <span data-i18n="hero.cta">Descargar CV</span>
       </a>
     </div>
   </div>
-  <div class="rigth-side md:col-span-5 relative group" aria-hidden="true">
+  <div class="right-side md:col-span-5 relative group" aria-hidden="true" data-animate>
     <div
       class="relative p-1 rounded-4xl shadow-xl border bg-linear-to-t from-transparent to-transparent group-hover:from-green-500 group-hover:to-green-500/10 transition-all duration-500 will-change-transform"
     >
@@ -63,105 +63,52 @@
 </section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { gsap, registerGsap } from "../scripts/gsap-init";
   import { prefersReducedMotion } from "../utils/gsap-utils";
 
-  gsap.registerPlugin(ScrollTrigger);
+  registerGsap();
 
   const prefersReduced = prefersReducedMotion();
+  const root = document.querySelector<HTMLElement>("#home");
+  if (!root) {
+    // Si no hay sección que animar, aseguramos que el contenido sea visible
+    document
+      .querySelectorAll<HTMLElement>("[data-animate]")
+      .forEach((el) => gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1, rotation: 0 }));
+  } else {
+    const D = (d: number) => (prefersReduced ? 0.01 : d);
+    const E = (e: string) => (prefersReduced ? "none" : e);
 
-  // Set initial states with gsap.set for better performance
-  gsap.set(".badge-text", {
-    opacity: 0,
-    y: -20,
-    willChange: "transform, opacity",
-  });
-  gsap.set(".title-line", {
-    opacity: 0,
-    x: -50,
-    willChange: "transform, opacity",
-  });
-  gsap.set(".hero-description", {
-    opacity: 0,
-    y: 20,
-    willChange: "transform, opacity",
-  });
-  gsap.set(".hero-cta", {
-    opacity: 0,
-    scale: 0.9,
-    willChange: "transform, opacity",
-  });
-  gsap.set(".rigth-side", {
-    opacity: 0,
-    x: 100,
-    rotation: 5,
-    willChange: "transform, opacity",
-  });
+    // Set transform starts (opacity ya viene de CSS para progressive enhancement)
+    gsap.set(root.querySelector(".badge-text"), { y: -20 });
+    gsap.set(root.querySelectorAll(".title-line"), { x: -50 });
+    gsap.set(root.querySelector(".hero-description"), { y: 20 });
+    gsap.set(root.querySelector(".hero-cta"), { scale: 0.9 });
+    gsap.set(root.querySelector(".right-side"), { x: 100, rotation: 5 });
 
-  const tl = gsap.timeline({
-    defaults: {
-      ease: prefersReduced ? "none" : "power3.out",
-      duration: prefersReduced ? 0.01 : undefined,
-    },
-  });
+    const tl = gsap.timeline({ defaults: { ease: E("power3.out") } });
+    tl.to(root.querySelector(".badge-text"), { duration: D(0.8), opacity: 1, y: 0 }, 0)
+      .to(root.querySelectorAll(".title-line"), { duration: D(1), opacity: 1, x: 0, stagger: 0.2 }, 0.4)
+      .to(root.querySelector(".hero-description"), { duration: D(0.8), opacity: 1, y: 0 }, 0.9)
+      .to(root.querySelector(".hero-cta"), { duration: D(0.6), opacity: 1, scale: 1 }, 1.4)
+      .to(root.querySelector(".right-side"), { duration: D(1.2), opacity: 1, x: 0, rotation: 0 }, 1.0);
 
-  tl.to(".badge-text", {
-    duration: prefersReduced ? 0.01 : 0.8,
-    opacity: 1,
-    y: 0,
-    stagger: 0.1,
-  })
-    .to(
-      ".title-line",
-      {
-        duration: prefersReduced ? 0.01 : 1,
-        opacity: 1,
-        x: 0,
-        stagger: 0.2,
-      },
-      "-=0.4",
-    )
-    .to(
-      ".hero-description",
-      {
-        duration: prefersReduced ? 0.01 : 0.8,
-        opacity: 1,
-        y: 0,
-      },
-      "-=0.5",
-    )
-    .to(
-      ".hero-cta",
-      {
-        duration: prefersReduced ? 0.01 : 0.6,
-        opacity: 1,
-        scale: 1,
-      },
-      "-=0.3",
-    )
-    .to(
-      ".rigth-side",
-      {
-        duration: prefersReduced ? 0.01 : 1.2,
-        opacity: 1,
-        x: 0,
-        rotation: 0,
-      },
-      "-=0.8",
-    );
-
-  // Only add scroll animation if not preferring reduced motion
-  if (!prefersReduced) {
-    gsap.to(".rigth-side", {
-      scrollTrigger: {
-        trigger: ".rigth-side",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      },
-      y: -50,
-      ease: "none",
+    // Limpieza del estado initial una vez animado
+    tl.eventCallback("onComplete", () => {
+      gsap.set(root.querySelectorAll("[data-animate]"), { willChange: "auto" });
     });
+
+    if (!prefersReduced) {
+      gsap.to(root.querySelector(".right-side"), {
+        scrollTrigger: {
+          trigger: root.querySelector(".right-side"),
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+        y: -50,
+        ease: "none",
+      });
+    }
   }
 </script>

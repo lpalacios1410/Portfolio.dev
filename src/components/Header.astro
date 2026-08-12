@@ -1,6 +1,5 @@
 ---
-const { pathname } = Astro.url;
-const currentPath = pathname.replace(/\//, "");
+const { hash } = Astro.url;
 
 const navItems = [
   { name: "Inicio", href: "#home", i18n: "header.home" },
@@ -8,6 +7,7 @@ const navItems = [
   { name: "Proyectos", href: "#projects", i18n: "header.projects" },
   { name: "Formación", href: "#formacion", i18n: "header.education" },
 ];
+const isActive = (href: string) => hash === href.slice(1) || (hash === "" && href === "#home");
 ---
 
 <header id="header" role="banner">
@@ -42,9 +42,9 @@ const navItems = [
           <a
             href={item.href}
             class="text-base font-medium tracking-wide transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
-            style={currentPath === item.href ? "color: var(--color-green-500);" : "color: var(--color-on-surface-variant);"}
+            style={isActive(item.href) ? "color: var(--color-green-500);" : "color: var(--color-on-surface-variant);"}
             role="menuitem"
-            aria-current={currentPath === item.href ? "page" : undefined}
+            aria-current={isActive(item.href) ? "page" : undefined}
           >
             <span data-i18n={item.i18n}>{item.name}</span>
           </a>

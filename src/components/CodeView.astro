@@ -4,29 +4,19 @@
 >
   <div
     class="flex gap-2 mb-2 pt-1 overflow-x-auto"
-    role="tablist"
-    aria-label="Seleccionar archivo de código"
+    aria-label="Archivos mostrados"
   >
-    <button
-      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-500/20 text-blue-500 whitespace-nowrap"
-      role="tab"
-      aria-selected="true"
-      aria-controls="code-container">frontend.js</button
-    >
+    <span
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs border-b-2 border-blue-400 bg-gray-500/20 text-blue-500 whitespace-nowrap"
+    >frontend.js</span>
 
-    <button
-      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-green-400 hover:opacity-80 bg-gray-500/20 text-green-500 whitespace-nowrap"
-      role="tab"
-      aria-selected="false"
-      aria-controls="code-container">backend.py</button
-    >
+    <span
+      class="px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs border-b-2 border-transparent bg-gray-500/20 text-green-500 whitespace-nowrap"
+    >backend.py</span>
 
-    <button
-      class="hidden sm:block px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs transition cursor-pointer border-b-2 border-transparent focus:outline-none focus:ring-2 focus:ring-red-400 bg-gray-500/20 hover:opacity-80 text-red-500 whitespace-nowrap"
-      role="tab"
-      aria-selected="false"
-      aria-controls="code-container">database.sql</button
-    >
+    <span
+      class="hidden sm:block px-3 sm:px-4 py-1 rounded-t-lg font-mono text-xs border-b-2 border-transparent bg-gray-500/20 text-red-500 whitespace-nowrap"
+    >database.sql</span>
   </div>
   <div
     class="rounded-2xl border shadow-2xl relative overflow-hidden bg-black/30 border-outline-variant"
@@ -150,8 +140,9 @@
       }
       .line-content {
         display: inline-block;
-        visibility: hidden; /* Oculto inicialmente */
       }
+      /* El contenido se oculta solo si JS está activo (progressive enhancement) */
+      .js-ready .line-content { visibility: hidden; }
     </style>
   </div>
 
@@ -162,38 +153,37 @@
       getReducedMotionConfig,
     } from "../utils/gsap-utils";
 
+    let masterTl: gsap.core.Timeline | null = null;
+
     const initTypewriterLoop = () => {
-      const lines = document.querySelectorAll(".typewriter-line");
+      if (masterTl) {
+        masterTl.kill();
+        masterTl = null;
+      }
+      const lines = document.querySelectorAll<HTMLElement>(".typewriter-line");
+      if (!lines.length) return;
+
       const motionConfig = getReducedMotionConfig();
       const prefersReduced = prefersReducedMotion();
 
       // 1. Preparación: Medir y configurar estados iniciales
       lines.forEach((line) => {
-        const content = line.querySelector(".line-content");
-        // Hacemos visible el contenido internamente para medirlo
-        gsap.set(content, {
-          visibility: "visible",
-          willChange: "transform, opacity",
-        });
-        // Guardamos el ancho real en un atributo de datos
-        (line as HTMLElement).dataset.width =
-          (content as HTMLElement).offsetWidth + "px";
-        // Volvemos a ocultar el contenedor principal
+        const content = line.querySelector<HTMLElement>(".line-content");
+        if (!content) return;
+        gsap.set(content, { visibility: "visible" });
+        line.dataset.width = content.offsetWidth + "px";
         gsap.set(line, { width: 0, willChange: "width" });
       });
 
       // Si prefiere movimiento reducido, mostrar todo el código instantáneamente
       if (prefersReduced) {
-        gsap.set(".typewriter-line", {
-          width: "auto",
-          borderRightColor: "transparent",
-        });
+        gsap.set(lines, { width: "auto", borderRightColor: "transparent" });
         gsap.set(".line-content", { visibility: "visible" });
         return;
       }
 
       // 2. Crear la Línea de Tiempo Principal (Timeline)
-      const masterTl = gsap.timeline({
+      masterTl = gsap.timeline({
         repeat: -1,
         yoyo: true,
         repeatDelay: 2,
@@ -202,15 +192,13 @@
 
       // 3. Añadir animaciones para cada línea
       lines.forEach((line, index) => {
-        const targetWidthStr = (line as HTMLElement).dataset.width;
-        const targetWidth = targetWidthStr ? parseFloat(targetWidthStr) : 0;
+        const targetWidth = parseFloat(line.dataset.width ?? "0") || 0;
 
-        // Animación de escritura de la línea actual
-        masterTl.to(
+        masterTl!.to(
           line,
           {
             width: `${targetWidth}px`,
-            duration: Math.max(targetWidth * 0.008, 0.3), // Velocidad basada en la longitud
+            duration: Math.max(targetWidth * 0.008, 0.3),
             ease: "none",
             onStart: () => {
               gsap.set(line, { borderRightColor: "#22c55e" });
@@ -221,13 +209,14 @@
               }
             },
           },
-          0.1,
-        ); // Pequeño retraso entre líneas
+          index === 0 ? 0.1 : ">0.25",
+        );
       });
     };
 
-    // Ejecución segura en Astro
-    document.addEventListener("astro:page-load", initTypewriterLoop);
+    // Carga inicial: sin View Transitions, `astro:page-load` no se dispara al cargar.
+    // El guard interno `if (masterTl) masterTl.kill()` evita timelines duplicadas.
     initTypewriterLoop();
+    document.addEventListener("astro:page-load", initTypewriterLoop);
   </script>
 </section>

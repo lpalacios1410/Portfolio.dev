@@ -10,7 +10,7 @@ const canonicalURL = new URL(
   Astro.url.pathname,
   Astro.site || "https://portfolio-dev-nine-phi.vercel.app/",
 );
-const imageURL = new URL("/developer.jpg", Astro.url);
+const imageURL = new URL("/dev.jpg", Astro.url);
 ---
 
 <!doctype html>
@@ -22,6 +22,7 @@ const imageURL = new URL("/developer.jpg", Astro.url);
         if (lang === "en" || lang === "es") {
           document.documentElement.lang = lang;
         }
+        document.documentElement.classList.add("js-ready");
       })();
     </script>
     <meta charset="UTF-8" />
@@ -51,10 +52,6 @@ const imageURL = new URL("/developer.jpg", Astro.url);
     <a href="#home" class="skip-link" data-i18n="layout.skip">Saltar al contenido principal</a>
     <slot />
   </body>
-  <script
-    is:inline
-    src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"
-  ></script>
 </html>
 
 <style>

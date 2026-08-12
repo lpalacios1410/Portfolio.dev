@@ -73,6 +73,11 @@ body {
   }
 }
 
+/* Progressive enhancement: content hidden only when JS is active (gsap will animate).
+   If JS fails or is disabled, content remains visible. */
+.js-ready [data-animate] { opacity: 0; }
+.js-ready .typewriter-line .line-content { visibility: hidden; }
+
 /* Improved selection colors */
 ::selection {
   background-color: var(--color-primary);

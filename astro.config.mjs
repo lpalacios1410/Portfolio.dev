@@ -7,6 +7,8 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://portfolio-dev-nine-phi.vercel.app/',
+  build: { inlineStylesheets: 'auto' },
   vite: {
     plugins: [tailwindcss()]
   },

@@ -4,10 +4,28 @@ import tailwind from "../icons/tailwindcss.svg";
 import nodejs from "../icons/nodejs.svg";
 import javascript from "../icons/javascript.svg";
 import postgresql from "../icons/postgresql.svg";
-import CardProject from "./CardProject.astro";
-import imgProyecto1 from "../../public/onlygirlsccs.png";
+import CardProject, { type ProjectKeys } from "./CardProject.astro";
+import type { SvgComponent } from "astro/types";
+import type { ImageMetadata } from "astro";
+import imgProyecto1 from "../assets/onlygirlsccs.png";
 
-const projects = [
+type TechIcon = SvgComponent;
+interface TechStackItem { label: string; icon: TechIcon; }
+interface Project {
+  title: string;
+  subtitle: string;
+  category: string;
+  description: string;
+  languages: TechStackItem[];
+  status: string;
+  imageSrc: ImageMetadata;
+  imageAlt: string;
+  urlProject: string;
+  urlDemo: string;
+  keys: ProjectKeys;
+}
+
+const projects: Project[] = [
   {
     title: "E-commerce onlygirlsccs",
     subtitle: "App web",
@@ -25,7 +43,7 @@ const projects = [
     imageSrc: imgProyecto1,
     imageAlt: "Captura de pantalla de la tienda online OnlyGirlsCCS",
     urlProject: "https://github.com/lpalacios1410/OnlyGirlsCss-Ecommerce",
-    urlDemo: "https://onlygirlsccs-ecommerce-frontend.vercel.app/",
+    urlDemo: "https://onlygirlsccs.vercel.app/",
     keys: {
       title: "projects.0.title",
       subtitle: "projects.0.subtitle",
@@ -35,17 +53,20 @@ const projects = [
     },
   },
 ];
-
 ---
 
-<section class="max-w-7xl mx-auto px-8 py-20 scroll-mt-20" id="projects" aria-labelledby="projects-heading">
+<section
+  class="max-w-7xl mx-auto px-8 py-20 scroll-mt-20"
+  id="projects"
+  aria-labelledby="projects-heading"
+>
   <div
     class="mb-16 flex flex-col gap-5 md:flex-row items-baseline justify-between"
   >
     <h2
       id="projects-heading"
       class="projects-title text-5xl font-black tracking-tighter text-on-surface"
-      data-i18n="projects.heading"
+      data-i18n="projects.heading" data-animate
     >
       Proyectos Destacados
     </h2>
@@ -58,7 +79,11 @@ const projects = [
       <span data-i18n="projects.view_all">Ver todos los proyectos</span>
     </a>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" data-i18n-aria="projects.aria_list">
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-8"
+    role="list"
+    data-i18n-aria="projects.aria_list"
+  >
     {
       projects.map((project, index) => (
         <CardProject {...project} index={index} />
@@ -68,44 +93,40 @@ const projects = [
 </section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { gsap, registerGsap } from "../scripts/gsap-init";
   import { prefersReducedMotion } from "../utils/gsap-utils";
 
-  gsap.registerPlugin(ScrollTrigger);
+  registerGsap();
 
   const prefersReduced = prefersReducedMotion();
 
-  // Set initial states
-  gsap.set(".projects-title", { opacity:0, x: -50, willChange: "transform, opacity" });
-  gsap.set(".project-card", { opacity:0, y: 80, scale: 0.95, willChange: "transform, opacity" });
+  // Initial transforms (opacity ya via CSS progressive enhancement)
+  const root = document.querySelector<HTMLElement>("#projects");
+  if (root) {
+    gsap.set(root.querySelector(".projects-title"), { x: -50 });
+    gsap.set(root.querySelectorAll(".project-card"), { y: 80, scale: 0.95 });
 
-  gsap.to(".projects-title", {
-    scrollTrigger: {
-      trigger: "#projects",
-      start: "top 80%",
-    },
-    opacity: 1,
-    x: 0,
-    duration: prefersReduced ? 0.01 : 0.8,
-    ease: prefersReduced ? "none" : "power3.out",
-  });
+    if (prefersReduced) {
+      gsap.set([root.querySelector(".projects-title"), ...root.querySelectorAll(".project-card")], {
+        opacity: 1, x: 0, y: 0, scale: 1,
+      });
+    } else {
+      gsap.to(root.querySelector(".projects-title"), {
+        scrollTrigger: { trigger: root, start: "top 80%" },
+        opacity: 1, x: 0, duration: 0.8, ease: "power3.out",
+      });
 
-  const cards = gsap.utils.toArray(".project-card");
-
-  cards.forEach((card: any, i: number) => {
-    gsap.to(card, {
-      scrollTrigger: {
-        trigger: card,
-        start: "top 90%",
-        toggleActions: "play none none reverse",
-      },
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: prefersReduced ? 0.01 : 0.8,
-      delay: i * 0.15,
-      ease: prefersReduced ? "none" : "power2.out",
-    });
-  });
+      gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".project-card")).forEach((card, i) => {
+        gsap.to(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.8, delay: i * 0.15, ease: "power2.out",
+        });
+      });
+    }
+  }
 </script>
