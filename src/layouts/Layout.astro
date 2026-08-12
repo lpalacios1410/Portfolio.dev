@@ -10,7 +10,7 @@ const canonicalURL = new URL(
   Astro.url.pathname,
   Astro.site || "https://portfolio-dev-nine-phi.vercel.app/",
 );
-const imageURL = new URL("/developer.jpg", Astro.url);
+const imageURL = new URL("/dev.jpg", Astro.url);
 ---
 
 <!doctype html>
@@ -22,6 +22,7 @@ const imageURL = new URL("/developer.jpg", Astro.url);
         if (lang === "en" || lang === "es") {
           document.documentElement.lang = lang;
         }
+        document.documentElement.classList.add("js-ready");
       })();
     </script>
     <meta charset="UTF-8" />

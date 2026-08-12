@@ -48,7 +48,7 @@ const projects = [
     <h2
       id="projects-heading"
       class="projects-title text-5xl font-black tracking-tighter text-on-surface"
-      data-i18n="projects.heading"
+      data-i18n="projects.heading" data-animate
     >
       Proyectos Destacados
     </h2>
@@ -83,45 +83,33 @@ const projects = [
 
   const prefersReduced = prefersReducedMotion();
 
-  // Set initial states
-  gsap.set(".projects-title", {
-    opacity: 0,
-    x: -50,
-    willChange: "transform, opacity",
-  });
-  gsap.set(".project-card", {
-    opacity: 0,
-    y: 80,
-    scale: 0.95,
-    willChange: "transform, opacity",
-  });
+  // Initial transforms (opacity ya via CSS progressive enhancement)
+  const root = document.querySelector<HTMLElement>("#projects");
+  if (root) {
+    gsap.set(root.querySelector(".projects-title"), { x: -50 });
+    gsap.set(root.querySelectorAll(".project-card"), { y: 80, scale: 0.95 });
 
-  gsap.to(".projects-title", {
-    scrollTrigger: {
-      trigger: "#projects",
-      start: "top 80%",
-    },
-    opacity: 1,
-    x: 0,
-    duration: prefersReduced ? 0.01 : 0.8,
-    ease: prefersReduced ? "none" : "power3.out",
-  });
+    if (prefersReduced) {
+      gsap.set([root.querySelector(".projects-title"), ...root.querySelectorAll(".project-card")], {
+        opacity: 1, x: 0, y: 0, scale: 1,
+      });
+    } else {
+      gsap.to(root.querySelector(".projects-title"), {
+        scrollTrigger: { trigger: root, start: "top 80%" },
+        opacity: 1, x: 0, duration: 0.8, ease: "power3.out",
+      });
 
-  const cards = gsap.utils.toArray(".project-card");
-
-  cards.forEach((card: any, i: number) => {
-    gsap.to(card, {
-      scrollTrigger: {
-        trigger: card,
-        start: "top 90%",
-        toggleActions: "play none none reverse",
-      },
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: prefersReduced ? 0.01 : 0.8,
-      delay: i * 0.15,
-      ease: prefersReduced ? "none" : "power2.out",
-    });
-  });
+      gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".project-card")).forEach((card, i) => {
+        gsap.to(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.8, delay: i * 0.15, ease: "power2.out",
+        });
+      });
+    }
+  }
 </script>

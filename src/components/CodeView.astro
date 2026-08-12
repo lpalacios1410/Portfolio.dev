@@ -150,8 +150,9 @@
       }
       .line-content {
         display: inline-block;
-        visibility: hidden; /* Oculto inicialmente */
       }
+      /* El contenido se oculta solo si JS está activo (progressive enhancement) */
+      .js-ready .line-content { visibility: hidden; }
     </style>
   </div>
 
@@ -162,38 +163,37 @@
       getReducedMotionConfig,
     } from "../utils/gsap-utils";
 
+    let masterTl: gsap.core.Timeline | null = null;
+
     const initTypewriterLoop = () => {
-      const lines = document.querySelectorAll(".typewriter-line");
+      if (masterTl) {
+        masterTl.kill();
+        masterTl = null;
+      }
+      const lines = document.querySelectorAll<HTMLElement>(".typewriter-line");
+      if (!lines.length) return;
+
       const motionConfig = getReducedMotionConfig();
       const prefersReduced = prefersReducedMotion();
 
       // 1. Preparación: Medir y configurar estados iniciales
       lines.forEach((line) => {
-        const content = line.querySelector(".line-content");
-        // Hacemos visible el contenido internamente para medirlo
-        gsap.set(content, {
-          visibility: "visible",
-          willChange: "transform, opacity",
-        });
-        // Guardamos el ancho real en un atributo de datos
-        (line as HTMLElement).dataset.width =
-          (content as HTMLElement).offsetWidth + "px";
-        // Volvemos a ocultar el contenedor principal
+        const content = line.querySelector<HTMLElement>(".line-content");
+        if (!content) return;
+        gsap.set(content, { visibility: "visible" });
+        line.dataset.width = content.offsetWidth + "px";
         gsap.set(line, { width: 0, willChange: "width" });
       });
 
       // Si prefiere movimiento reducido, mostrar todo el código instantáneamente
       if (prefersReduced) {
-        gsap.set(".typewriter-line", {
-          width: "auto",
-          borderRightColor: "transparent",
-        });
+        gsap.set(lines, { width: "auto", borderRightColor: "transparent" });
         gsap.set(".line-content", { visibility: "visible" });
         return;
       }
 
       // 2. Crear la Línea de Tiempo Principal (Timeline)
-      const masterTl = gsap.timeline({
+      masterTl = gsap.timeline({
         repeat: -1,
         yoyo: true,
         repeatDelay: 2,
@@ -202,15 +202,13 @@
 
       // 3. Añadir animaciones para cada línea
       lines.forEach((line, index) => {
-        const targetWidthStr = (line as HTMLElement).dataset.width;
-        const targetWidth = targetWidthStr ? parseFloat(targetWidthStr) : 0;
+        const targetWidth = parseFloat(line.dataset.width ?? "0") || 0;
 
-        // Animación de escritura de la línea actual
-        masterTl.to(
+        masterTl!.to(
           line,
           {
             width: `${targetWidth}px`,
-            duration: Math.max(targetWidth * 0.008, 0.3), // Velocidad basada en la longitud
+            duration: Math.max(targetWidth * 0.008, 0.3),
             ease: "none",
             onStart: () => {
               gsap.set(line, { borderRightColor: "#22c55e" });
@@ -222,12 +220,11 @@
             },
           },
           0.1,
-        ); // Pequeño retraso entre líneas
+        );
       });
     };
 
-    // Ejecución segura en Astro
+    // Única inicialización: astro:page-load se dispara en carga inicial y navegaciones
     document.addEventListener("astro:page-load", initTypewriterLoop);
-    initTypewriterLoop();
   </script>
 </section>

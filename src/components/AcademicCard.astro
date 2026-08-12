@@ -37,7 +37,7 @@ const formacion = [
       <h2
         id="formacion-heading"
         class="text-2xl sm:text-3xl md:text-5xl font-black tracking-widest flex items-center justify-center gap-4 text-on-surface"
-        data-i18n="education.heading"
+        data-i18n="education.heading" data-animate
       >
         # Formación Académica
       </h2>
@@ -55,7 +55,7 @@ const formacion = [
           formacion.map((estudio, index) => (
             <div
               class={`formacion-item flex items-center relative mb-8 md:mb-12 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-              role="listitem"
+              role="listitem" data-animate
             >
               <div class="hidden md:block md:w-5/12">
                 <div class="formacion-card bg-gray-500/10 rounded-2xl p-4 sm:p-6 border border-outline-variant hover:border-primary/30 transition-all duration-300 text-left hover:scale-[1.02] focus-within:ring-2 focus-within:ring-primary">
@@ -115,42 +115,34 @@ const formacion = [
   gsap.registerPlugin(ScrollTrigger);
 
   const prefersReduced = prefersReducedMotion();
+  const root = document.querySelector<HTMLElement>("#formacion");
 
-  // Set initial states
-  gsap.set(".formacion h2", {
-    opacity: 0,
-    y: -50,
-    willChange: "transform, opacity",
-  });
-  const items = gsap.utils.toArray(".formacion-item");
-  items.forEach((item: any, i: number) => {
-    gsap.set(item, {
-      opacity: 0,
-      x: i % 2 === 0 ? -100 : 100,
-      willChange: "transform, opacity",
-    });
-  });
+  if (root) {
+    const heading = root.querySelector("h2") as HTMLElement | null;
+    const items = gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".formacion-item"));
 
-  gsap.to(".formacion h2", {
-    scrollTrigger: { trigger: ".formacion", start: "top 80%" },
-    opacity: 1,
-    y: 0,
-    duration: prefersReduced ? 0.01 : 0.8,
-    ease: prefersReduced ? "none" : "power3.out",
-  });
+    items.forEach((item, i) => gsap.set(item, { x: i % 2 === 0 ? -100 : 100 }));
 
-  items.forEach((item: any, i: number) => {
-    gsap.to(item, {
-      opacity: 1,
-      x: 0,
-      duration: prefersReduced ? 0.01 : 1,
-      delay: i * 0.2,
-      ease: prefersReduced ? "none" : "power3.out",
-      scrollTrigger: {
-        trigger: item,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-    });
-  });
+    if (prefersReduced) {
+      gsap.set([heading, ...items], { opacity: 1, x: 0, y: 0 });
+    } else {
+      gsap.set(heading, { y: -50 });
+      gsap.to(heading, {
+        scrollTrigger: { trigger: root, start: "top 80%" },
+        opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+      });
+
+      items.forEach((item, i) => {
+        gsap.to(item, {
+          opacity: 1, x: 0,
+          duration: 1, delay: i * 0.2, ease: "power3.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    }
+  }
 </script>
