@@ -4,10 +4,28 @@ import tailwind from "../icons/tailwindcss.svg";
 import nodejs from "../icons/nodejs.svg";
 import javascript from "../icons/javascript.svg";
 import postgresql from "../icons/postgresql.svg";
-import CardProject from "./CardProject.astro";
+import CardProject, { type ProjectKeys } from "./CardProject.astro";
+import type { SvgComponent } from "astro/types";
+import type { ImageMetadata } from "astro";
 import imgProyecto1 from "../../public/onlygirlsccs.png";
 
-const projects = [
+type TechIcon = SvgComponent;
+interface TechStackItem { label: string; icon: TechIcon; }
+interface Project {
+  title: string;
+  subtitle: string;
+  category: string;
+  description: string;
+  languages: TechStackItem[];
+  status: string;
+  imageSrc: ImageMetadata;
+  imageAlt: string;
+  urlProject: string;
+  urlDemo: string;
+  keys: ProjectKeys;
+}
+
+const projects: Project[] = [
   {
     title: "E-commerce onlygirlsccs",
     subtitle: "App web",
@@ -75,11 +93,10 @@ const projects = [
 </section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { gsap, registerGsap } from "../scripts/gsap-init";
   import { prefersReducedMotion } from "../utils/gsap-utils";
 
-  gsap.registerPlugin(ScrollTrigger);
+  registerGsap();
 
   const prefersReduced = prefersReducedMotion();
 

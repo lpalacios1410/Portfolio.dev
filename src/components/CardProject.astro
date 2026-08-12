@@ -1,24 +1,33 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { SvgComponent } from "astro/types";
+
+export type TechIcon = SvgComponent;
+interface TechStackItem {
+  label: string;
+  icon: TechIcon;
+}
+export interface ProjectKeys {
+  title: string;
+  subtitle: string;
+  category: string;
+  description: string;
+  status: string;
+}
 interface Props {
   title: string;
   subtitle: string;
   category: string;
   description: string;
-  languages: { label: string; icon: any }[];
+  languages: TechStackItem[];
   status: string;
   imageSrc: ImageMetadata;
   imageAlt: string;
   urlProject: string;
   urlDemo: string;
   index?: number;
-  keys?: {
-    title: string;
-    subtitle: string;
-    category: string;
-    description: string;
-    status: string;
-  };
+  keys?: ProjectKeys;
 }
 
 const {

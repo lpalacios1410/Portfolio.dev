@@ -72,11 +72,10 @@ import SkillCard from "./SkillCard.astro";
 </section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { gsap, registerGsap } from "../scripts/gsap-init";
   import { prefersReducedMotion } from "../utils/gsap-utils";
 
-  gsap.registerPlugin(ScrollTrigger);
+  registerGsap();
 
   const prefersReduced = prefersReducedMotion();
   const root = document.querySelector<HTMLElement>("#skills");
