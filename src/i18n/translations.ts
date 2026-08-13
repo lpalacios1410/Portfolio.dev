@@ -64,6 +64,13 @@ const es = {
   "projects.0.description":
     "Trabajo como repartidor para una tienda online en Caracas, Venezuela. También ayudé a crear un pequeño sistema para que nuestros clientes puedan ver nuestro catálogo. Esto nos permite dejar de depender de WhatsApp y ofrecer otras opciones.",
   "projects.0.status": "Activo",
+  "projects.1.title": "AstroTurismo",
+  "projects.1.subtitle": "Landing Page",
+  "projects.1.category": "Turismo",
+  "projects.1.description":
+    "Sitio web de Turismo para la agencia ficticia AstroTurismo, especializada en llevar viajeros a los cielos más oscuros del planeta (Bortle clase 1 y 2) para observar auroras boreales, lluvias de meteoros, eclipses totales y la Vía Láctea.",
+  "projects.1.status": "Activo",
+  
 
   // Education
   "education.heading": "# Formación Académica",
@@ -151,6 +158,13 @@ const en: Record<keyof typeof es, string> = {
   "projects.0.description":
     "I work as a delivery driver for an online store in Caracas, Venezuela. I also helped build a small system so our customers can browse our catalog. This allows us to stop relying on WhatsApp and offer other options.",
   "projects.0.status": "Active",
+  "projects.1.title": "AstroTurismo",
+  "projects.1.subtitle": "Landing Page",
+  "projects.1.category": "Tourism",
+  "projects.1.description":
+    "Tourism website for the fictional agency AstroTurismo, which specializes in taking travelers to the darkest skies on the planet (Bortle Class 1 and 2) to observe the Northern Lights, meteor showers, total eclipses, and the Milky Way.",
+  "projects.1.status": "Active",
+  
 
   // Education
   "education.heading": "# Academic Education",

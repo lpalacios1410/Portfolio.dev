@@ -4,13 +4,19 @@ import tailwind from "../icons/tailwindcss.svg";
 import nodejs from "../icons/nodejs.svg";
 import javascript from "../icons/javascript.svg";
 import postgresql from "../icons/postgresql.svg";
+import astro from "../icons/astro.svg";
+import typescript from "../icons/typescript.svg";
 import CardProject, { type ProjectKeys } from "./CardProject.astro";
 import type { SvgComponent } from "astro/types";
 import type { ImageMetadata } from "astro";
 import imgProyecto1 from "../assets/onlygirlsccs.png";
+import imgProyecto2 from "../assets/Astro1.png";
 
 type TechIcon = SvgComponent;
-interface TechStackItem { label: string; icon: TechIcon; }
+interface TechStackItem {
+  label: string;
+  icon: TechIcon;
+}
 interface Project {
   title: string;
   subtitle: string;
@@ -52,6 +58,32 @@ const projects: Project[] = [
       status: "projects.0.status",
     },
   },
+
+  {
+    title: "AstroTurismo",
+    subtitle: "Landing Page",
+    category: "Turismo",
+    description:
+      "Sitio web de Turismo para la agencia ficticia AstroTurismo, especializada en llevar viajeros a los cielos más oscuros del planeta (Bortle clase 1 y 2) para observar auroras boreales, lluvias de meteoros, eclipses totales y la Vía Láctea.",
+    languages: [
+      { label: "Astro", icon: astro },
+      { label: "React", icon: react },
+      { label: "Tailwind", icon: tailwind },
+      { label: "TypeScript", icon: typescript },
+    ],
+    status: "Activo",
+    imageSrc: imgProyecto2,
+    imageAlt: "Captura de pantalla landing page AstroTurismo",
+    urlProject: "https://github.com/lpalacios1410/AstroTurismo",
+    urlDemo: "https://astro-turismo.vercel.app/",
+    keys: {
+      title: "projects.1.title",
+      subtitle: "projects.1.subtitle",
+      category: "projects.1.category",
+      description: "projects.1.description",
+      status: "projects.1.status",
+    },
+  },
 ];
 ---
 
@@ -66,7 +98,8 @@ const projects: Project[] = [
     <h2
       id="projects-heading"
       class="projects-title text-5xl font-black tracking-tighter text-on-surface"
-      data-i18n="projects.heading" data-animate
+      data-i18n="projects.heading"
+      data-animate
     >
       Proyectos Destacados
     </h2>
@@ -80,7 +113,7 @@ const projects: Project[] = [
     </a>
   </div>
   <div
-    class="grid grid-cols-1 md:grid-cols-3 gap-8"
+    class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start"
     role="list"
     data-i18n-aria="projects.aria_list"
   >
@@ -107,26 +140,44 @@ const projects: Project[] = [
     gsap.set(root.querySelectorAll(".project-card"), { y: 80, scale: 0.95 });
 
     if (prefersReduced) {
-      gsap.set([root.querySelector(".projects-title"), ...root.querySelectorAll(".project-card")], {
-        opacity: 1, x: 0, y: 0, scale: 1,
-      });
+      gsap.set(
+        [
+          root.querySelector(".projects-title"),
+          ...root.querySelectorAll(".project-card"),
+        ],
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+        },
+      );
     } else {
       gsap.to(root.querySelector(".projects-title"), {
         scrollTrigger: { trigger: root, start: "top 80%" },
-        opacity: 1, x: 0, duration: 0.8, ease: "power3.out",
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: "power3.out",
       });
 
-      gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".project-card")).forEach((card, i) => {
-        gsap.to(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 1, y: 0, scale: 1,
-          duration: 0.8, delay: i * 0.15, ease: "power2.out",
+      gsap.utils
+        .toArray<HTMLElement>(root.querySelectorAll(".project-card"))
+        .forEach((card, i) => {
+          gsap.to(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            delay: i * 0.15,
+            ease: "power2.out",
+          });
         });
-      });
     }
   }
 </script>
