@@ -90,6 +90,11 @@ const es = {
   "education.1.period": "2017 Noviembre - 2018 Marzo",
   "education.1.description":
     "Mi trayectoria en el desarrollo de software comenzó en 2017 con una formación Full Stack en 4Geeks Academy. Este programa fue el catalizador de mi carrera, proporcionándome una base sólida en lógica de programación y permitiéndome desarrollar mi primer proyecto integral. Tras una pausa necesaria para atender asuntos personales.",
+  "education.2.title": "Desarrollador Full Stack",
+  "education.2.school": "Autodidacta",
+  "education.2.period": "2025 Marzo - Presente",
+  "education.2.description":
+    "Actualmente sigo aprendiendo por mi cuenta todos los días, construyendo proyectos reales para poner en práctica lo que voy descubriendo. Aunque manejo el desarrollo Full Stack y me adapto sin problemas al backend cuando el proyecto lo requiere, mi fuerte y lo que más disfruto es crear interfaces en el Frontend, logrando que las webs se vean geniales y funcionen rápido.",
 
   // GitHub Calendar
   "github.heading": "Contribuciones en el último año",
@@ -189,6 +194,11 @@ const en: Record<keyof typeof es, string> = {
   "education.1.period": "2017 November - 2018 March",
   "education.1.description":
     "My journey in software development began in 2017 with Full Stack training at 4Geeks Academy. This program was the catalyst for my career, providing me with a solid foundation in programming logic and allowing me to develop my first comprehensive project. After a necessary break to attend to personal matters.",
+  "education.2.title": "Full Stack Developer",
+  "education.2.school": "Self-taught",
+  "education.2.period": "2025 March - Present",
+  "education.2.description":
+    "Currently I continue learning on my own every day, building real projects to put into practice what I discover. Although I handle Full Stack development and adapt easily to backend when the project requires it, my strength and what I enjoy most is creating Frontend interfaces, making websites look great and run fast.",
 
   // GitHub Calendar
   "github.heading": "Contributions in the last year",
