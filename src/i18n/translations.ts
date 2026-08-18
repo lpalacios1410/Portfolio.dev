@@ -70,7 +70,12 @@ const es = {
   "projects.1.description":
     "Sitio web de Turismo para la agencia ficticia AstroTurismo, especializada en llevar viajeros a los cielos más oscuros del planeta (Bortle clase 1 y 2) para observar auroras boreales, lluvias de meteoros, eclipses totales y la Vía Láctea.",
   "projects.1.status": "Activo",
-  
+  "projects.2.title": "MecaApp",
+  "projects.2.subtitle": "App web",
+  "projects.2.category": "Servicios automotrices",
+  "projects.2.description":
+    "Aplicación diseñada para mecánicos, que ofrece diversos planes para facilitar la contratación de servicios. Permite a los clientes explorar y contratar servicios de mantenimiento y reparación vehicular de forma sencilla.",
+  "projects.2.status": "En desarrollo",
 
   // Education
   "education.heading": "# Formación Académica",
@@ -164,7 +169,12 @@ const en: Record<keyof typeof es, string> = {
   "projects.1.description":
     "Tourism website for the fictional agency AstroTurismo, which specializes in taking travelers to the darkest skies on the planet (Bortle Class 1 and 2) to observe the Northern Lights, meteor showers, total eclipses, and the Milky Way.",
   "projects.1.status": "Active",
-  
+  "projects.2.title": "MecaApp",
+  "projects.2.subtitle": "Web app",
+  "projects.2.category": "Automotive services",
+  "projects.2.description":
+    "Application designed for mechanics, offering various plans to facilitate service hiring. Allows clients to explore and hire vehicle maintenance and repair services in a simple way.",
+  "projects.2.status": "In development",
 
   // Education
   "education.heading": "# Academic Education",
