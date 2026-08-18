@@ -6,6 +6,7 @@ import javascript from "../icons/javascript.svg";
 import postgresql from "../icons/postgresql.svg";
 import astro from "../icons/astro.svg";
 import typescript from "../icons/typescript.svg";
+import nextjs from "../icons/nextjs.svg";
 import CardProject, { type ProjectKeys } from "./CardProject.astro";
 import type { SvgComponent } from "astro/types";
 import type { ImageMetadata } from "astro";
@@ -82,6 +83,32 @@ const projects: Project[] = [
       category: "projects.1.category",
       description: "projects.1.description",
       status: "projects.1.status",
+    },
+  },
+
+  {
+    title: "MecaApp",
+    subtitle: "App web",
+    category: "Servicios automotrices",
+    description:
+      "Aplicación diseñada para mecánicos, que ofrece diversos planes para facilitar la contratación de servicios. Permite a los clientes explorar y contratar servicios de mantenimiento y reparación vehicular de forma sencilla.",
+    languages: [
+      { label: "Next.js", icon: nextjs },
+      { label: "React", icon: react },
+      { label: "Tailwind", icon: tailwind },
+      { label: "TypeScript", icon: typescript },
+    ],
+    status: "En desarrollo",
+    imageSrc: "/mecaApp.jpg",
+    imageAlt: "Captura de pantalla de MecaApp - Aplicación para mecánicos",
+    urlProject: "https://github.com/lpalacios1410/MecaApp",
+    urlDemo: "",
+    keys: {
+      title: "projects.2.title",
+      subtitle: "projects.2.subtitle",
+      category: "projects.2.category",
+      description: "projects.2.description",
+      status: "projects.2.status",
     },
   },
 ];
