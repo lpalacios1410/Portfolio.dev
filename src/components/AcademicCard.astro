@@ -1,6 +1,19 @@
 ---
 const formacion = [
   {
+    titulo: "Desarrollador Full Stack",
+    escuela: "Autodidacta",
+    periodo: "2025 Marzo - Presente",
+    descripcion:
+      "Actualmente sigo aprendiendo por mi cuenta todos los días, construyendo proyectos reales para poner en práctica lo que voy descubriendo. Aunque manejo el desarrollo Full Stack y me adapto sin problemas al backend cuando el proyecto lo requiere, mi fuerte y lo que más disfruto es crear interfaces en el Frontend, logrando que las webs se vean geniales y funcionen rápido.",
+    keys: {
+      title: "education.2.title",
+      school: "education.2.school",
+      period: "education.2.period",
+      description: "education.2.description",
+    },
+  },
+  {
     titulo: "Programador Full Stack",
     escuela: "Social Oplesk",
     periodo: "2024 Agosto - 2025 Marzo",
@@ -8,6 +21,7 @@ const formacion = [
       "Recientemente completé una especialización en SocialOplesk para actualizar mis bases técnicas, lo que me permitió dar el salto al aprendizaje de manera autodidacta. Soy un desarrollador forjado en la constancia, apoyándome en referentes de la industria (como Midudev y MoureDev) para dominar las tecnologías actuales a través de la práctica intensiva y el desarrollo de proyectos propios.",
     keys: {
       title: "education.0.title",
+      school: "education.0.school",
       period: "education.0.period",
       description: "education.0.description",
     },
@@ -20,6 +34,7 @@ const formacion = [
       "Mi trayectoria en el desarrollo de software comenzó en 2017 con una formación Full Stack en 4Geeks Academy. Este programa fue el catalizador de mi carrera, proporcionándome una base sólida en lógica de programación y permitiéndome desarrollar mi primer proyecto integral. Tras una pausa necesaria para atender asuntos personales.",
     keys: {
       title: "education.1.title",
+      school: "education.1.school",
       period: "education.1.period",
       description: "education.1.description",
     },
@@ -69,7 +84,7 @@ const formacion = [
                   <h3 class="text-lg sm:text-xl font-bold mt-2 text-on-surface" data-i18n-lang={estudio.keys.title}>
                     {estudio.titulo}
                   </h3>
-                  <p class="mt-1 text-green-500 text-sm">{estudio.escuela}</p>
+                  <p class="mt-1 text-green-500 text-sm" data-i18n-lang={estudio.keys.school}>{estudio.escuela}</p>
                   <p class="text-xs sm:text-sm mt-2 sm:mt-3 text-on-surface-variant" data-i18n-lang={estudio.keys.description}>
                     {estudio.descripcion}
                   </p>
@@ -88,7 +103,7 @@ const formacion = [
                   <h3 class="text-lg font-bold mt-2 text-on-surface" data-i18n-lang={estudio.keys.title}>
                     {estudio.titulo}
                   </h3>
-                  <p class="mt-1 text-green-500 text-sm">{estudio.escuela}</p>
+                  <p class="mt-1 text-green-500 text-sm" data-i18n-lang={estudio.keys.school}>{estudio.escuela}</p>
                   <p class="text-xs mt-2 text-on-surface-variant" data-i18n-lang={estudio.keys.description}>
                     {estudio.descripcion}
                   </p>
