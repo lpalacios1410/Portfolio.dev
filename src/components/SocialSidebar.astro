@@ -235,10 +235,6 @@ const socialLinks = [
     pointer-events: none;
   }
 
-  #sidebar-wrapper.no-transition {
-    transition: none;
-  }
-
   @media (min-width: 768px) {
     #sidebar-wrapper {
       top: 50%;
@@ -306,8 +302,6 @@ const socialLinks = [
 
   initI18n();
 
-  const STORAGE_KEY = "portfolio-sidebar-collapsed";
-
   // Lang toggle
   const langBtnEl = document.getElementById("lang-toggle");
   const langTextEl = document.getElementById("lang-toggle-text");
@@ -347,18 +341,15 @@ const socialLinks = [
     const toggleBtn: HTMLElement = toggleBtnEl;
     const chevron: HTMLElement = chevronEl;
 
-    function isCollapsed(): boolean {
-      return localStorage.getItem(STORAGE_KEY) === "true";
-    }
-
     let entrance: gsap.core.Tween | null = null;
+    let collapsed = false;
 
-    function applyState(collapsed: boolean) {
-      wrapper.classList.toggle("collapsed", collapsed);
-      showBtn.classList.toggle("visible", collapsed);
+    function applyState(isCollapsed: boolean) {
+      wrapper.classList.toggle("collapsed", isCollapsed);
+      showBtn.classList.toggle("visible", isCollapsed);
       chevron.setAttribute(
         "d",
-        collapsed ? "M9 6l6 6-6 6" : "M15 6l-6 6 6 6",
+        isCollapsed ? "M9 6l6 6-6 6" : "M15 6l-6 6 6 6",
       );
     }
 
@@ -368,29 +359,18 @@ const socialLinks = [
         entrance = null;
         gsap.set(wrapper, { clearProps: "transform,opacity" });
       }
-      const next = !isCollapsed();
-      localStorage.setItem(STORAGE_KEY, String(next));
-      applyState(next);
+      collapsed = !collapsed;
+      applyState(collapsed);
       toggleBtn.setAttribute(
         "aria-label",
-        next ? "Mostrar sidebar" : "Ocultar sidebar",
+        collapsed ? "Mostrar sidebar" : "Ocultar sidebar",
       );
     }
 
     toggleBtn.addEventListener("click", toggleSidebar);
     showBtn.addEventListener("click", toggleSidebar);
 
-    const initiallyCollapsed = isCollapsed();
-
-    wrapper.classList.add("no-transition");
-    applyState(initiallyCollapsed);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        wrapper.classList.remove("no-transition");
-      });
-    });
-
-    if (!initiallyCollapsed && !prefersReducedMotion()) {
+    if (!prefersReducedMotion()) {
       const isDesktop = window.matchMedia("(min-width: 768px)").matches;
       entrance = gsap.from(wrapper, {
         x: isDesktop ? -80 : 0,
