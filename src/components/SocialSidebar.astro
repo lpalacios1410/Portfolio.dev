@@ -21,16 +21,13 @@ const socialLinks = [
 ];
 ---
 
-<div
-  id="sidebar-wrapper"
-  class="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 hidden md:block transition-transform duration-300 ease-in-out"
->
+<div id="sidebar-wrapper">
   <aside
-    class="flex flex-col gap-4 relative top-50"
+    class="flex flex-col gap-4 relative md:top-50"
     data-i18n-aria="sidebar.aria"
   >
     <div
-      class="bg-black/40 backdrop-blur-md rounded-2xl p-3 flex flex-col gap-3 border border-outline-variant/30 shadow-lg relative"
+      class="bg-black/40 backdrop-blur-md rounded-2xl p-2 md:p-3 flex flex-row md:flex-col items-center md:items-stretch gap-2 md:gap-3 border border-outline-variant/30 shadow-lg relative"
       role="list"
       data-i18n-aria="sidebar.aria"
     >
@@ -107,7 +104,10 @@ const socialLinks = [
       }
 
       <!-- Language Toggle -->
-      <div class="w-px h-4 bg-outline-variant/30 mx-auto" aria-hidden="true">
+      <div
+        class="h-px w-4 md:w-px md:h-4 bg-outline-variant/30 my-auto md:my-0 md:mx-auto"
+        aria-hidden="true"
+      >
       </div>
       <button
         id="lang-toggle"
@@ -122,7 +122,8 @@ const socialLinks = [
       </button>
     </div>
 
-    <div class="mt-4 flex flex-col items-center gap-2" aria-hidden="true">
+    <div class="mt-4 hidden md:flex flex-col items-center gap-2" aria-hidden="true"
+      >
       <div class="w-px h-16 bg-green-500"></div>
       <span
         class="text-xs font-mono text-green-500 vertical-text"
@@ -135,7 +136,7 @@ const socialLinks = [
 <!-- Floating button to show sidebar when hidden -->
 <button
   id="sidebar-show-btn"
-  class="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 hidden md:flex w-10 h-10 bg-black/60 backdrop-blur-md rounded-2xl border border-outline-variant/30 items-center justify-center hover:bg-primary/30 hover:border-primary/50 transition-all cursor-pointer shadow-lg"
+  class="flex w-10 h-10 bg-black/60 backdrop-blur-md rounded-2xl border border-outline-variant/30 items-center justify-center hover:bg-primary/30 hover:border-primary/50 cursor-pointer shadow-lg"
   type="button"
   aria-label="Mostrar sidebar"
 >
@@ -214,11 +215,94 @@ const socialLinks = [
     background: #3c3b6e;
     z-index: 1;
   }
+
+  #sidebar-wrapper {
+    position: fixed;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    z-index: 40;
+    transform: translateX(-50%);
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.45s;
+  }
+
+  #sidebar-wrapper.collapsed {
+    transform: translateX(-50%) translateY(150%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #sidebar-wrapper.no-transition {
+    transition: none;
+  }
+
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      top: 50%;
+      bottom: auto;
+      left: 2rem;
+      transform: translateY(-50%);
+    }
+
+    #sidebar-wrapper.collapsed {
+      transform: translateY(-50%) translateX(-130%);
+    }
+  }
+
+  #sidebar-show-btn {
+    position: fixed;
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    z-index: 40;
+    transform: translateX(-50%) scale(0.75);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.35s,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  #sidebar-show-btn.visible {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0.18s, 0.18s, 0s, 0s, 0s;
+  }
+
+  @media (min-width: 768px) {
+    #sidebar-show-btn {
+      top: 50%;
+      bottom: auto;
+      left: 2rem;
+      transform: translateY(-50%) scale(0.75);
+    }
+
+    #sidebar-show-btn.visible {
+      transform: translateY(-50%) scale(1);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #sidebar-toggle svg,
+    #sidebar-show-btn svg {
+      transform: rotate(-90deg);
+    }
+  }
 </style>
 
 <script>
   import { initI18n, setLanguage, getCurrentLang } from "../i18n/i18n";
   import type { Lang } from "../i18n/translations";
+  import { gsap } from "gsap";
+  import { prefersReducedMotion } from "../utils/gsap-utils";
 
   initI18n();
 
@@ -267,23 +351,23 @@ const socialLinks = [
       return localStorage.getItem(STORAGE_KEY) === "true";
     }
 
+    let entrance: gsap.core.Tween | null = null;
+
     function applyState(collapsed: boolean) {
-      if (collapsed) {
-        wrapper.style.transform = "translateY(-50%) translateX(-120%)";
-        wrapper.style.opacity = "0";
-        wrapper.style.pointerEvents = "none";
-        showBtn.style.display = "flex";
-        chevron.setAttribute("d", "M9 6l6 6-6 6");
-      } else {
-        wrapper.style.transform = "translateY(-50%)";
-        wrapper.style.opacity = "1";
-        wrapper.style.pointerEvents = "";
-        showBtn.style.display = "none";
-        chevron.setAttribute("d", "M15 6l-6 6 6 6");
-      }
+      wrapper.classList.toggle("collapsed", collapsed);
+      showBtn.classList.toggle("visible", collapsed);
+      chevron.setAttribute(
+        "d",
+        collapsed ? "M9 6l6 6-6 6" : "M15 6l-6 6 6 6",
+      );
     }
 
     function toggleSidebar() {
+      if (entrance) {
+        entrance.kill();
+        entrance = null;
+        gsap.set(wrapper, { clearProps: "transform,opacity" });
+      }
       const next = !isCollapsed();
       localStorage.setItem(STORAGE_KEY, String(next));
       applyState(next);
@@ -296,6 +380,27 @@ const socialLinks = [
     toggleBtn.addEventListener("click", toggleSidebar);
     showBtn.addEventListener("click", toggleSidebar);
 
-    applyState(isCollapsed());
+    const initiallyCollapsed = isCollapsed();
+
+    wrapper.classList.add("no-transition");
+    applyState(initiallyCollapsed);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        wrapper.classList.remove("no-transition");
+      });
+    });
+
+    if (!initiallyCollapsed && !prefersReducedMotion()) {
+      const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+      entrance = gsap.from(wrapper, {
+        x: isDesktop ? -80 : 0,
+        y: isDesktop ? 0 : 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.4,
+        clearProps: "transform,opacity",
+      });
+    }
   }
 </script>
