@@ -1,5 +1,50 @@
 ---
 import SkillCard from "./SkillCard.astro";
+
+interface Stack {
+  titleKey: string;
+  accent: string;
+  icons: { name: string; label: string }[];
+}
+
+const stacks: Stack[] = [
+  {
+    titleKey: "FRONTEND",
+    accent: "#60a5fa",
+    icons: [
+      { name: "html", label: "HTML 5" },
+      { name: "css", label: "CSS 3" },
+      { name: "javascript", label: "JavaScript" },
+      { name: "react", label: "React" },
+      { name: "astro", label: "Astro" },
+      { name: "tailwindcss", label: "Tailwind" },
+      { name: "bootstrap", label: "Bootstrap" },
+    ],
+  },
+  {
+    titleKey: "BACKEND",
+    accent: "#22c55e",
+    icons: [
+      { name: "nodejs", label: "Node JS" },
+      { name: "expressjs", label: "Express" },
+      { name: "python", label: "Python" },
+      { name: "postgresql", label: "PostgreSQL" },
+    ],
+  },
+  {
+    titleKey: "TOOLS",
+    accent: "#ef4444",
+    icons: [
+      { name: "github", label: "Github" },
+      { name: "git", label: "Git" },
+      { name: "copilot", label: "Copilot" },
+      { name: "vscode", label: "VSCode" },
+      { name: "postman", label: "Postman" },
+      { name: "docker", label: "Docker" },
+      { name: "playwright", label: "Playwright" },
+    ],
+  },
+];
 ---
 
 <section
@@ -27,45 +72,15 @@ import SkillCard from "./SkillCard.astro";
         role="list"
         data-i18n-aria="skills.aria_list"
       >
-        <!-- Frontend Stack -->
-        <SkillCard
-          titleKey="FRONTEND"
-          borderColor="border-blue-400"
-          icons={[
-            { name: "html", label: "HTML 5" },
-            { name: "css", label: "CSS 3" },
-            { name: "javascript", label: "JavaScript" },
-            { name: "react", label: "React" },
-            { name: "astro", label: "Astro" },
-            { name: "tailwindcss", label: "Tailwind" },
-            { name: "bootstrap", label: "Bootstrap" },
-          ]}
-        />
-        <!-- Backend Stack -->
-        <SkillCard
-          titleKey="BACKEND"
-          borderColor="border-green-500"
-          icons={[
-            { name: "nodejs", label: "Node JS" },
-            { name: "expressjs", label: "Express" },
-            { name: "python", label: "Python" },
-            { name: "postgresql", label: "PostgreSQL" },
-          ]}
-        />
-        <!-- Tools Stack -->
-        <SkillCard
-          titleKey="TOOLS"
-          borderColor="border-red-500"
-          icons={[
-            { name: "github", label: "Github" },
-            { name: "git", label: "Git" },
-            { name: "copilot", label: "Copilot" },
-            { name: "vscode", label: "VSCode" },
-            { name: "postman", label: "Postman" },
-            { name: "docker", label: "Docker" },
-            { name: "playwright", label: "Playwright" },
-          ]}
-        />
+        {
+          stacks.map((stack) => (
+            <SkillCard
+              titleKey={stack.titleKey}
+              accent={stack.accent}
+              icons={stack.icons}
+            />
+          ))
+        }
       </div>
     </div>
   </div>
