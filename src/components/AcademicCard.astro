@@ -1,11 +1,10 @@
 ---
 const formacion = [
   {
-    titulo: "Desarrollador Full Stack",
+    titulo: "Desarrollador Full Stack / IA Engineer",
     escuela: "Autodidacta",
     periodo: "2025 Marzo - Presente",
-    descripcion:
-      "Actualmente sigo aprendiendo por mi cuenta todos los días, construyendo proyectos reales para poner en práctica lo que voy descubriendo. Aunque manejo el desarrollo Full Stack y me adapto sin problemas al backend cuando el proyecto lo requiere, mi fuerte y lo que más disfruto es crear interfaces en el Frontend, logrando que las webs se vean geniales y funcionen rápido.",
+    descripcion: "",
     keys: {
       title: "education.2.title",
       school: "education.2.school",
@@ -52,7 +51,8 @@ const formacion = [
       <h2
         id="formacion-heading"
         class="text-2xl sm:text-3xl md:text-5xl font-black tracking-widest flex items-center justify-center gap-4 text-on-surface"
-        data-i18n="education.heading" data-animate
+        data-i18n="education.heading"
+        data-animate
       >
         # Formación Académica
       </h2>
@@ -70,7 +70,8 @@ const formacion = [
           formacion.map((estudio, index) => (
             <div
               class={`formacion-item flex items-center relative mb-8 md:mb-12 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-              role="listitem" data-animate
+              role="listitem"
+              data-animate
             >
               <div class="hidden md:block md:w-5/12">
                 <div class="formacion-card bg-gray-500/10 rounded-2xl p-4 sm:p-6 border border-outline-variant hover:border-primary/30 transition-all duration-300 text-left hover:scale-[1.02] focus-within:ring-2 focus-within:ring-primary">
@@ -81,11 +82,22 @@ const formacion = [
                   >
                     {estudio.periodo}
                   </time>
-                  <h3 class="text-lg sm:text-xl font-bold mt-2 text-on-surface" data-i18n-lang={estudio.keys.title}>
+                  <h3
+                    class="text-lg sm:text-xl font-bold mt-2 text-on-surface"
+                    data-i18n-lang={estudio.keys.title}
+                  >
                     {estudio.titulo}
                   </h3>
-                  <p class="mt-1 text-green-500 text-sm" data-i18n-lang={estudio.keys.school}>{estudio.escuela}</p>
-                  <p class="text-xs sm:text-sm mt-2 sm:mt-3 text-on-surface-variant" data-i18n-lang={estudio.keys.description}>
+                  <p
+                    class="mt-1 text-green-500 text-sm"
+                    data-i18n-lang={estudio.keys.school}
+                  >
+                    {estudio.escuela}
+                  </p>
+                  <p
+                    class="text-xs sm:text-sm mt-2 sm:mt-3 text-on-surface-variant"
+                    data-i18n-lang={estudio.keys.description}
+                  >
                     {estudio.descripcion}
                   </p>
                 </div>
@@ -100,11 +112,22 @@ const formacion = [
                   >
                     {estudio.periodo}
                   </time>
-                  <h3 class="text-lg font-bold mt-2 text-on-surface" data-i18n-lang={estudio.keys.title}>
+                  <h3
+                    class="text-lg font-bold mt-2 text-on-surface"
+                    data-i18n-lang={estudio.keys.title}
+                  >
                     {estudio.titulo}
                   </h3>
-                  <p class="mt-1 text-green-500 text-sm" data-i18n-lang={estudio.keys.school}>{estudio.escuela}</p>
-                  <p class="text-xs mt-2 text-on-surface-variant" data-i18n-lang={estudio.keys.description}>
+                  <p
+                    class="mt-1 text-green-500 text-sm"
+                    data-i18n-lang={estudio.keys.school}
+                  >
+                    {estudio.escuela}
+                  </p>
+                  <p
+                    class="text-xs mt-2 text-on-surface-variant"
+                    data-i18n-lang={estudio.keys.description}
+                  >
                     {estudio.descripcion}
                   </p>
                 </div>
@@ -133,7 +156,9 @@ const formacion = [
 
   if (root) {
     const heading = root.querySelector("h2") as HTMLElement | null;
-    const items = gsap.utils.toArray<HTMLElement>(root.querySelectorAll(".formacion-item"));
+    const items = gsap.utils.toArray<HTMLElement>(
+      root.querySelectorAll(".formacion-item"),
+    );
 
     items.forEach((item, i) => gsap.set(item, { x: i % 2 === 0 ? -100 : 100 }));
 
@@ -143,13 +168,19 @@ const formacion = [
       gsap.set(heading, { y: -50 });
       gsap.to(heading, {
         scrollTrigger: { trigger: root, start: "top 80%" },
-        opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
       });
 
       items.forEach((item, i) => {
         gsap.to(item, {
-          opacity: 1, x: 0,
-          duration: 1, delay: i * 0.2, ease: "power3.out",
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: item,
             start: "top 85%",
