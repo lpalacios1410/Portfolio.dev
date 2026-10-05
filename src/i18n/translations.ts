@@ -38,7 +38,6 @@ const es = {
   "hero.title2": "Full-Stack",
   "hero.description":
     "Desarrollador full-stack especializado en la creación de soluciones digitales a medida. Aunque estoy en las primeras etapas de mi carrera como desarrollador, tengo una base sólida para crear productos funcionales, escalables y visualmente coherentes. Actualmente estoy en proceso de aprendizaje autodidacta para convertirme en un Ingeniero de Software en Inteligencia Artificial.",
-",
   "hero.cta": "Descargar CV",
   "hero.cta_aria": "Descargar currículum vitae en formato PDF",
 
@@ -76,7 +75,7 @@ const es = {
   "projects.2.category": "Servicios automotrices",
   "projects.2.description":
     "Aplicación diseñada para mecánicos, que ofrece diversos planes para facilitar la contratación de servicios. Permite a los clientes explorar y contratar servicios de mantenimiento y reparación vehicular de forma sencilla.",
-  "projects.2.status": "En desarrollo",
+  "projects.2.status": "Activo",
 
   // Education
   "education.heading": "# Formación Académica",
@@ -142,7 +141,7 @@ const en: Record<keyof typeof es, string> = {
   "hero.title1": "Full-Stack",
   "hero.title2": "Developer",
   "hero.description":
-    "Full-stack developer specializing in creating custom digital solutions. Although I am in the early stages of my development career, I have a solid foundation for building functional, scalable, and visually cohesive products. I am currently pursuing self-directed learning to become a Software Engineer specializing in Artificial Intelligence.",
+    "A full-stack developer specializing in creating custom digital solutions. Although I am in the early stages of my development career, I possess a solid foundation for building functional, scalable, and visually cohesive products. I am currently pursuing self-directed learning to become an Artificial Intelligence Software Engineer.",
   "hero.cta": "Download CV",
   "hero.cta_aria": "Download curriculum vitae in PDF format",
 
