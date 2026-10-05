@@ -179,7 +179,7 @@ const en: Record<keyof typeof es, string> = {
   "projects.2.category": "Automotive services",
   "projects.2.description":
     "Application designed for mechanics, offering various plans to facilitate service hiring. Allows clients to explore and hire vehicle maintenance and repair services in a simple way.",
-  "projects.2.status": "In development",
+  "projects.2.status": "Active",
 
   // Education
   "education.heading": "# Academic Education",
