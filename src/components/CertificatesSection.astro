@@ -1,0 +1,690 @@
+---
+/**
+ * Sección Certificados — carousel de tarjetas apiladas con GSAP Flip.
+ *
+ * Orden del array: del más relevante al menos relevante.
+ * Para agregar/cambiar un certificado:
+ *  1. Sube JPG (+ PDF opcional) a public/certificados/
+ *  2. Actualiza el array `certificates` (title, image, pdf?, imageAlt)
+ *  3. Agrega la clave i18n certificates.N.title en translations.ts (es + en)
+ */
+interface CertificateKeys {
+  title: string;
+}
+
+interface Certificate {
+  title: string;
+  image: string;
+  pdf?: string;
+  imageAlt: string;
+  keys: CertificateKeys;
+}
+
+const certificates: Certificate[] = [
+  {
+    title: "Full Stack Pro",
+    image: "/certificados/full-stack-pro.jpg",
+    imageAlt: "Certificado Full Stack Pro",
+    keys: { title: "certificates.0.title" },
+  },
+  {
+    title: "Full Stack Mid",
+    image: "/certificados/full-stack-mid.jpg",
+    imageAlt: "Certificado Full Stack Mid",
+    keys: { title: "certificates.1.title" },
+  },
+  {
+    title: "Full Stack Básico",
+    image: "/certificados/full-stack-basico.jpg",
+    imageAlt: "Certificado Full Stack Básico",
+    keys: { title: "certificates.2.title" },
+  },
+  {
+    title: "Inteligencia Artificial",
+    image: "/certificados/IA.jpg",
+    imageAlt: "Certificado de Inteligencia Artificial",
+    keys: { title: "certificates.3.title" },
+  },
+  {
+    title: "Docker",
+    image: "/certificados/docker.jpg",
+    imageAlt: "Certificado Docker",
+    keys: { title: "certificates.4.title" },
+  },
+  {
+    title: "Git",
+    image: "/certificados/git.jpg",
+    imageAlt: "Certificado Git",
+    keys: { title: "certificates.5.title" },
+  },
+  {
+    title: "Webinar de Python",
+    image: "/certificados/webinarpython.jpg",
+    imageAlt: "Certificado de Webinar de Python",
+    keys: { title: "certificates.6.title" },
+  },
+];
+
+const front = certificates[0];
+const certCount = certificates.length;
+---
+
+<section
+  class="certificados py-12 md:py-20 relative overflow-hidden"
+  id="certificados"
+  aria-labelledby="certificados-heading"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+    <div class="mb-10 md:mb-16 text-center relative z-20">
+      <h2
+        id="certificados-heading"
+        class="text-2xl sm:text-3xl md:text-5xl font-black tracking-widest text-on-surface"
+        data-i18n="certificates.heading"
+        data-animate
+      >
+        # Certificados
+      </h2>
+    </div>
+
+    <div
+      class="flex flex-col items-center gap-8 sm:gap-10 lg:flex-row lg:items-center lg:justify-center lg:gap-14"
+    >
+      <div
+        class="certs-info w-full max-w-md lg:max-w-xs shrink-0 text-center lg:text-left order-2 lg:order-1"
+        data-animate
+      >
+        <p
+          class="font-mono text-xs sm:text-sm text-green-500 uppercase tracking-wider"
+          data-i18n="certificates.eyebrow"
+        >
+          Credenciales
+        </p>
+        <h3
+          class="text-lg sm:text-xl md:text-2xl font-bold mt-2 text-on-surface min-h-10"
+          data-front-title
+          data-i18n-lang={front.keys.title}
+        >
+          {front.title}
+        </h3>
+        <a
+          class="inline-flex items-center gap-2 mt-3 text-primary duration-300 focus-visible:ring-2 focus-visible:ring-primary rounded border border-green-500 px-2 py-1 hover:bg-green-500 hover:text-on-primary transition-colors duratio300n-"
+          data-front-pdf
+          href={front.pdf ?? front.image}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n="certificates.view_pdf"
+          data-i18n-aria="certificates.view_pdf_aria"
+        >
+          <span></span>
+          <svg
+            class="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 17L17 7M17 7H7M17 7V17"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
+        <p
+          class="mt-5 text-xs sm:text-sm text-on-surface-variant"
+          data-i18n="certificates.hint"
+        >
+          Usa las flechas o click para cambiar de certificado
+        </p>
+        <p
+          class="mt-1 font-mono text-xs text-on-surface-variant/70"
+          data-front-counter
+          aria-live="polite"
+        >
+          1 / {certCount}
+        </p>
+      </div>
+
+      <div class="certs-stage order-1 lg:order-2" data-animate>
+        <div class="certs-controls">
+          <button
+            type="button"
+            class="certs-nav-btn"
+            data-cert-prev
+            aria-label="Certificado anterior"
+            data-i18n-aria="certificates.prev_aria"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M15 18l-6-6 6-6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+
+          <div class="certs-frame" data-cert-frame style={`--n: ${certCount}`}>
+            <div
+              class="certs-slider"
+              role="list"
+              tabindex="0"
+              data-i18n-aria="certificates.aria_slider"
+              aria-label="Carrusel de certificados"
+            >
+              {
+                certificates.map((cert, index) => (
+                  <article
+                    class="cert-item group"
+                    role="listitem"
+                    tabindex="0"
+                    data-title={cert.title}
+                    data-pdf={cert.pdf ?? cert.image}
+                    data-title-key={cert.keys.title}
+                    data-index={index}
+                    aria-label={cert.title}
+                    data-i18n-aria={cert.keys.title}
+                  >
+                    <img
+                      class="cert-item-img"
+                      src={cert.image}
+                      alt={cert.imageAlt}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      width="420"
+                      height="560"
+                    />
+                    <div class="cert-overlay">
+                      <h4
+                        class="cert-overlay-title"
+                        data-i18n-lang={cert.keys.title}
+                      >
+                        {cert.title}
+                      </h4>
+                      <a
+                        class="cert-overlay-link"
+                        href={cert.pdf ?? cert.image}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-i18n="certificates.view_pdf"
+                        data-i18n-aria="certificates.view_pdf_aria"
+                      >
+                        <span data-i18n="certificates.view_pdf">
+                          Ver certificado
+                        </span>
+                      </a>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="certs-nav-btn"
+            data-cert-next
+            aria-label="Siguiente certificado"
+            data-i18n-aria="certificates.next_aria"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M9 18l6-6-6-6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .certs-frame {
+    --card-w: clamp(9rem, 26vw, 11.5rem);
+    --offset: clamp(0.55rem, 1.8vw, 0.85rem);
+    --n: 7;
+    position: relative;
+    width: calc(var(--card-w) + (var(--n) - 1) * var(--offset));
+    height: calc(var(--card-w) * 4 / 3 + (var(--n) - 1) * var(--offset));
+    flex-shrink: 0;
+  }
+
+  .certs-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .certs-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+    border: 1px solid var(--color-outline-variant);
+    background: var(--color-surface-container);
+    color: var(--color-on-surface);
+    cursor: pointer;
+    transition:
+      color 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.2s ease;
+  }
+
+  .certs-nav-btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .certs-nav-btn:hover,
+  .certs-nav-btn:focus-visible {
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  .certs-nav-btn:active {
+    transform: scale(0.95);
+  }
+
+  .certs-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 900px;
+    cursor: pointer;
+  }
+
+  .certs-slider:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 10px;
+    border-radius: 10px;
+  }
+
+  .cert-item {
+    --i: 0;
+    position: absolute;
+    /* Opción A: --i 0 = frente (abajo-izquierda del frame), mayor = fondo (arriba-derecha).
+       Todo queda dentro del frame: no invade # Certificados. */
+    left: calc(var(--i) * var(--offset));
+    top: calc((var(--n) - 1 - var(--i)) * var(--offset));
+    z-index: calc(40 - var(--i));
+    width: var(--card-w);
+    height: calc(var(--card-w) * 4 / 3);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-outline-variant);
+    background: var(--color-surface-container);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    transform-style: preserve-3d;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .cert-item:hover,
+  .cert-item:focus-visible,
+  .cert-item:focus-within {
+    border-color: color-mix(in oklab, var(--color-primary) 55%, transparent);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.45),
+      0 0 0 1px color-mix(in oklab, var(--color-primary) 35%, transparent);
+    outline: none;
+  }
+
+  .cert-item-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cert-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.65rem;
+    text-align: center;
+    background: color-mix(in oklab, var(--color-surface) 84%, transparent);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .cert-item:hover .cert-overlay,
+  .cert-item:focus-visible .cert-overlay,
+  .cert-item:focus-within .cert-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .cert-overlay-title {
+    font-size: clamp(0.7rem, 2.4vw, 0.95rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-on-surface);
+  }
+
+  .cert-overlay-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: clamp(0.65rem, 2vw, 0.75rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    border: 1px solid color-mix(in oklab, var(--color-primary) 45%, transparent);
+    border-radius: 999px;
+    padding: 0.3rem 0.65rem;
+    transition:
+      color 0.25s ease,
+      background-color 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .cert-overlay-link:hover,
+  .cert-overlay-link:focus-visible {
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  @media (min-width: 640px) {
+    .certs-frame {
+      --card-w: clamp(11.5rem, 20vw, 14rem);
+      --offset: clamp(0.75rem, 1.5vw, 1.05rem);
+    }
+
+    .certs-nav-btn {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+
+    .cert-item {
+      border-radius: 12px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .certs-frame {
+      --card-w: clamp(13rem, 15vw, 15.5rem);
+      --offset: clamp(0.95rem, 1.2vw, 1.25rem);
+    }
+
+    .certs-controls {
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .certs-controls {
+      gap: 0.35rem;
+    }
+
+    .certs-nav-btn {
+      width: 2.15rem;
+      height: 2.15rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap, registerGsap, Flip } from "../scripts/gsap-init";
+  import {
+    prefersReducedMotion,
+    getReducedMotionConfig,
+  } from "../utils/gsap-utils";
+  import { t, onLanguageChange, type TranslationKey } from "../i18n/i18n";
+
+  registerGsap();
+
+  const root = document.querySelector<HTMLElement>("#certificados");
+  if (root) {
+    const slider = root.querySelector<HTMLElement>(".certs-slider");
+    const frame = root.querySelector<HTMLElement>("[data-cert-frame]");
+    const prevBtn = root.querySelector<HTMLButtonElement>("[data-cert-prev]");
+    const nextBtn = root.querySelector<HTMLButtonElement>("[data-cert-next]");
+    const frontTitleEl = root.querySelector<HTMLElement>("[data-front-title]");
+    const frontPdfEl =
+      root.querySelector<HTMLAnchorElement>("[data-front-pdf]");
+    const frontCounterEl = root.querySelector<HTMLElement>(
+      "[data-front-counter]",
+    );
+    const heading = root.querySelector<HTMLElement>("h2");
+    const info = root.querySelector<HTMLElement>(".certs-info");
+    const stage = root.querySelector<HTMLElement>(".certs-stage");
+
+    const getItems = () =>
+      slider
+        ? gsap.utils.toArray<HTMLElement>(slider.querySelectorAll(".cert-item"))
+        : [];
+
+    const prefersReduced = prefersReducedMotion();
+    const reduce = getReducedMotionConfig("sine.inOut", 0.65);
+
+    let unsubLang: (() => void) | null = null;
+    let animating = false;
+
+    function applyStackLayout(): void {
+      const items = getItems();
+      items.forEach((item, index) => {
+        item.style.setProperty("--i", String(index));
+        item.style.zIndex = String(40 - index);
+        item.dataset.stackIndex = String(index);
+      });
+      if (frame) frame.style.setProperty("--n", String(items.length));
+    }
+
+    function updateFrontPanel(): void {
+      const items = getItems();
+      const front = items[0];
+      if (!front || !frontTitleEl || !frontPdfEl || !frontCounterEl) return;
+
+      const titleKey = front.dataset.titleKey as TranslationKey | undefined;
+      const title = front.dataset.title ?? "";
+      const pdf = front.dataset.pdf ?? "";
+      const index = Number(front.dataset.index ?? 0) + 1;
+
+      if (titleKey) {
+        frontTitleEl.setAttribute("data-i18n-lang", titleKey);
+        frontTitleEl.textContent = t(titleKey);
+      } else {
+        frontTitleEl.textContent = title;
+      }
+
+      frontPdfEl.setAttribute("href", pdf);
+      frontCounterEl.textContent = `${index} / ${items.length}`;
+    }
+
+    function animateStack(
+      mutate: (items: HTMLElement[]) => HTMLElement[],
+    ): void {
+      if (animating || !slider) return;
+      const items = getItems();
+      if (items.length < 2) return;
+
+      const state = Flip.getState(items);
+      mutate(items);
+      applyStackLayout();
+      updateFrontPanel();
+
+      if (prefersReduced) {
+        gsap.set(items, { clearProps: "all" });
+        applyStackLayout();
+        return;
+      }
+
+      animating = true;
+      Flip.from(state, {
+        targets: getItems(),
+        ease: reduce.ease,
+        absolute: true,
+        duration: reduce.duration,
+        onEnter: (elements) =>
+          gsap.from(elements, {
+            duration: 0.3,
+            yPercent: 20,
+            opacity: 0,
+            ease: "expo.out",
+          }),
+        onLeave: (elements) =>
+          gsap.to(elements, {
+            duration: 0.3,
+            yPercent: 5,
+            xPercent: -5,
+            transformOrigin: "bottom left",
+            opacity: 0,
+            ease: "expo.out",
+            onComplete: () => {
+              gsap.set(elements, { clearProps: "all" });
+              applyStackLayout();
+            },
+          }),
+        onComplete: () => {
+          gsap.set(getItems(), { clearProps: "all" });
+          applyStackLayout();
+          animating = false;
+        },
+      });
+    }
+
+    function advanceNext(): void {
+      if (!slider) return;
+      animateStack((items) => {
+        const last = items[items.length - 1];
+        slider.insertBefore(last, slider.firstElementChild);
+        return getItems();
+      });
+    }
+
+    function advancePrev(): void {
+      if (!slider) return;
+      animateStack((items) => {
+        const first = items[0];
+        slider.appendChild(first);
+        return getItems();
+      });
+    }
+
+    nextBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      advanceNext();
+    });
+
+    prevBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      advancePrev();
+    });
+
+    if (slider) {
+      slider.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement | null;
+        if (target?.closest("a")) return;
+        advanceNext();
+      });
+
+      slider.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          advanceNext();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          advanceNext();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          advancePrev();
+        }
+      });
+    }
+
+    unsubLang = onLanguageChange(() => {
+      updateFrontPanel();
+    });
+
+    applyStackLayout();
+    updateFrontPanel();
+
+    if (prefersReduced) {
+      gsap.set([heading, info, stage].filter(Boolean), {
+        opacity: 1,
+        x: 0,
+        y: 0,
+      });
+    } else {
+      if (heading) gsap.set(heading, { y: -40 });
+      if (info) gsap.set(info, { x: -40 });
+      if (stage) gsap.set(stage, { x: 70, opacity: 0 });
+
+      if (heading) {
+        gsap.to(heading, {
+          scrollTrigger: { trigger: root, start: "top 80%" },
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        });
+      }
+
+      if (info) {
+        gsap.to(info, {
+          scrollTrigger: { trigger: root, start: "top 80%" },
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          delay: 0.1,
+          ease: "power3.out",
+        });
+      }
+
+      if (stage) {
+        gsap.to(stage, {
+          scrollTrigger: { trigger: root, start: "top 80%" },
+          opacity: 1,
+          x: 0,
+          duration: 0.9,
+          delay: 0.2,
+          ease: "power3.out",
+        });
+      }
+    }
+
+    document.addEventListener("astro:page-load", () => {
+      if (unsubLang) {
+        unsubLang();
+        unsubLang = null;
+      }
+      animating = false;
+      applyStackLayout();
+      updateFrontPanel();
+      unsubLang = onLanguageChange(() => {
+        updateFrontPanel();
+      });
+    });
+  }
+</script>

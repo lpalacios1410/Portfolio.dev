@@ -96,6 +96,25 @@ const es = {
   "education.2.description":
     "Actualmente sigo aprendiendo por mi cuenta todos los días, construyendo proyectos reales para poner en práctica lo que voy descubriendo. Aunque manejo el desarrollo Full Stack, estoy trabajando en la comprension de la Inteligencia Artificial. Para convertirme en IA Software Engineer con el objetivo de desarrollar aplicaciones inteligentes que puedan aprender y adaptarse a las necesidades de los usuarios.",
 
+  // Certificates
+  "certificates.heading": "# Certificados",
+  "certificates.eyebrow": "Credenciales",
+  "certificates.view_pdf": "Ver certificado",
+  "certificates.view_pdf_aria": "Ver certificado en formato PDF",
+  "certificates.hint": "Usa las flechas o click para cambiar de certificado",
+  "certificates.aria_slider": "Carrusel de certificados, use las flechas o Enter para navegar",
+  "certificates.prev": "Anterior",
+  "certificates.next": "Siguiente",
+  "certificates.prev_aria": "Ver certificado anterior",
+  "certificates.next_aria": "Ver siguiente certificado",
+  "certificates.0.title": "Full Stack Pro",
+  "certificates.1.title": "Full Stack Mid",
+  "certificates.2.title": "Full Stack Básico",
+  "certificates.3.title": "Inteligencia Artificial",
+  "certificates.4.title": "Docker",
+  "certificates.5.title": "Git",
+  "certificates.6.title": "Webinar de Python",
+
   // GitHub Calendar
   "github.heading": "Contribuciones en el último año",
   "github.total": "total",
@@ -199,6 +218,25 @@ const en: Record<keyof typeof es, string> = {
   "education.2.period": "2025 March - Present",
   "education.2.description":
     "I am currently continuing to learn on my own every day, building real-world projects to put what I discover into practice. Although I am proficient in Full Stack development, I am working on understanding Artificial Intelligence with the goal of becoming an AI Software Engineer and developing intelligent applications that can learn and adapt to user needs.",
+
+  // Certificates
+  "certificates.heading": "# Certificates",
+  "certificates.eyebrow": "Credentials",
+  "certificates.view_pdf": "View certificate",
+  "certificates.view_pdf_aria": "View certificate in PDF format",
+  "certificates.hint": "Use the arrows or click to switch certificates",
+  "certificates.aria_slider": "Certificate carousel, use the arrows or Enter to navigate",
+  "certificates.prev": "Previous",
+  "certificates.next": "Next",
+  "certificates.prev_aria": "View previous certificate",
+  "certificates.next_aria": "View next certificate",
+  "certificates.0.title": "Full Stack Pro",
+  "certificates.1.title": "Full Stack Mid",
+  "certificates.2.title": "Full Stack Basic",
+  "certificates.3.title": "Artificial Intelligence",
+  "certificates.4.title": "Docker",
+  "certificates.5.title": "Git",
+  "certificates.6.title": "Python Webinar",
 
   // GitHub Calendar
   "github.heading": "Contributions in the last year",
